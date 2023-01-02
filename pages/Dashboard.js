@@ -1,18 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text, Image, Button, ScrollView, Table, TableRow, TableCell } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Button,
+  ScrollView,
+  Table,
+  TableRow,
+  TableCell,
+} from "react-native";
 
 export function Dashboard() {
   return (
     <View style={styles.container}>
       <View style={styles.upperNav}>
         <Image
-          source={require('../assets/notification.png')}
+          source={require("../assets/notification.png")}
           style={styles.notificationIcon}
         />
-        <Image
-          source={require('../assets/exit.png')}
-          style={styles.exitIcon}
-        />
+        <Image source={require("../assets/exit.png")} style={styles.exitIcon} />
       </View>
       <ScrollView style={styles.scrollPane}>
         <View style={styles.mainContent}>
@@ -22,7 +29,7 @@ export function Dashboard() {
               title="Connect Device"
               icon={
                 <Image
-                  source={require('../assets/bluetooth.png')}
+                  source={require("../assets/bluetooth.png")}
                   style={styles.bluetoothIcon}
                 />
               }
@@ -31,13 +38,15 @@ export function Dashboard() {
             <View style={styles.deviceStatus}>
               <Text style={styles.deviceStatusText}>Device Status: </Text>
               <Image
-                source={require('../assets/connected.png')}
+                source={require("../assets/connected.png")}
                 style={styles.statusIcon}
               />
             </View>
           </View>
           <View style={styles.stimulusDetails}>
-            <Text style={styles.stimulusDetailsTitle}>Your Previous Stimulus Details</Text>
+            <Text style={styles.stimulusDetailsTitle}>
+              Your Previous Stimulus Details
+            </Text>
             <Table style={styles.stimulusTable}>
               <TableRow>
                 <TableCell style={styles.tableHeader}>Type</TableCell>
@@ -51,7 +60,9 @@ export function Dashboard() {
                 <TableCell style={styles.tableCell}>Vibration</TableCell>
                 <TableCell style={styles.tableCell}>5 Hz</TableCell>
                 <TableCell style={styles.tableCell}>30 min</TableCell>
-                <TableCell style={styles.tableCell}>Jan 1, 2021 10:00 AM</TableCell>
+                <TableCell style={styles.tableCell}>
+                  Jan 1, 2021 10:00 AM
+                </TableCell>
                 <TableCell style={styles.tableCell}>50%</TableCell>
                 <TableCell style={styles.tableCell}>Left wrist</TableCell>
               </TableRow>
@@ -59,7 +70,9 @@ export function Dashboard() {
                 <TableCell style={styles.tableCell}>Sound</TableCell>
                 <TableCell style={styles.tableCell}>10 Hz</TableCell>
                 <TableCell style={styles.tableCell}>15 min</TableCell>
-                <TableCell style={styles.tableCell}>Jan 2, 2021 11:00 AM</TableCell>
+                <TableCell style={styles.tableCell}>
+                  Jan 2, 2021 11:00 AM
+                </TableCell>
                 <TableCell style={styles.tableCell}>70%</TableCell>
                 <TableCell style={styles.tableCell}>Right ear</TableCell>
               </TableRow>
@@ -72,7 +85,7 @@ export function Dashboard() {
           title="Home"
           icon={
             <Image
-              source={require('../assets/home.png')}
+              source={require("../assets/home.png")}
               style={styles.footerIcon}
             />
           }
@@ -83,7 +96,7 @@ export function Dashboard() {
           title="Settings"
           icon={
             <Image
-              source={require('../assets/settings.png')}
+              source={require("../assets/settings.png")}
               style={styles.footerIcon}
             />
           }
@@ -94,7 +107,7 @@ export function Dashboard() {
           title="Feedback"
           icon={
             <Image
-              source={require('../assets/feedback.png')}
+              source={require("../assets/feedback.png")}
               style={styles.footerIcon}
             />
           }
@@ -105,11 +118,11 @@ export function Dashboard() {
           title="Additional Details"
           icon={
             <Image
-              source={require('../assets/details.png')}
+              source={require("../assets/details.png")}
               style={styles.footerIcon}
             />
           }
-          onPress={() =>{}}
+          onPress={() => {}}
           style={styles.footerButton}
         />
       </View>
@@ -124,10 +137,10 @@ const styles = StyleSheet.create({
   },
   upperNav: {
     height: 60,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: "#fff",
     paddingHorizontal: 16,
   },
   notificationIcon: {
@@ -141,7 +154,7 @@ const styles = StyleSheet.create({
   },
   scrollPane: {
     flex: 1,
-    backgroundColor: '#00008B',
+    backgroundColor: "#00008B",
   },
   mainContent: {
     padding: 32,
@@ -151,8 +164,8 @@ const styles = StyleSheet.create({
   },
   connectTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
     marginBottom: 16,
   },
   bluetoothIcon: {
@@ -161,13 +174,13 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   deviceStatus: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 8,
   },
   deviceStatusText: {
     fontSize: 16,
-    color: '#fff',
+    color: "#fff",
   },
   statusIcon: {
     width: 24,
@@ -179,29 +192,29 @@ const styles = StyleSheet.create({
   },
   stimulusDetailsTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
     marginBottom: 16,
   },
   stimulusTable: {
-    width: '100%',
+    width: "100%",
   },
   tableHeader: {
-    backgroundColor: '#add8e6',
+    backgroundColor: "#add8e6",
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#00008B',
+    fontWeight: "bold",
+    color: "#00008B",
   },
   tableCell: {
     fontSize: 16,
-    color: '#fff',
+    color: "#fff",
   },
   footer: {
     height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: "#fff",
   },
   footerButton: {
     flex: 1,

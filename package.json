@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "pretty": "prettier --write \"./**/*.{js,jsx}" 
+    "pretty": "prettier --config ./.prettierrc --write \"./**/*.{js,jsx}" 
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.1",

@@ -1,55 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, TextInput, Image, Text, Button } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View, TextInput, Image, Text, Button } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
-function SignUp({navigation}) {
+function SignUp({ navigation }) {
   return (
-    <LinearGradient colors={['#1E90FF', '#00008B']} style={styles.gradient}>
-    <View style={styles.container}>
-      <Image
-        source={require('../assets/flashguard.jpg')}
-        style={styles.image}
-      />
-      <Text style={styles.title}>Sign Up for FlashGuard</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#fff"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#fff"
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        placeholderTextColor="#fff"
-        secureTextEntry
-      />
-      <Button title="Sign Up" onPress={() => {}} />
-      <View style={styles.orContainer}>
-        <View style={styles.line} />
-        <Text style={styles.orText}>or</Text>
-        <View style={styles.line} />
-      </View>
-      <Button
-        title="Sign Up with Microsoft"
-        onPress={() => navigation.navigate('Dashboard')}
-        style={styles.microsoftButton}
-      />
-      <Text style={styles.navigateText}>
-        Already have an account?{' '}
-        <Text
-          style={styles.navigateLink}
-          onPress={() => navigation.navigate('Sign In')}
-        >
-          Sign In
+    <LinearGradient colors={["#1E90FF", "#00008B"]} style={styles.gradient}>
+      <View style={styles.container}>
+        <Image
+          source={require("../assets/flashguard.jpg")}
+          style={styles.image}
+        />
+        <Text style={styles.title}>Sign Up for FlashGuard</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#fff"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#fff"
+          secureTextEntry
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor="#fff"
+          secureTextEntry
+        />
+        <Button title="Sign Up" onPress={() => {}} />
+        <View style={styles.orContainer}>
+          <View style={styles.line} />
+          <Text style={styles.orText}>or</Text>
+          <View style={styles.line} />
+        </View>
+        <Button
+          title="Sign Up with Microsoft"
+          onPress={() => navigation.navigate("Dashboard")}
+          style={styles.microsoftButton}
+        />
+        <Text style={styles.navigateText}>
+          Already have an account?{" "}
+          <Text
+            style={styles.navigateLink}
+            onPress={() => navigation.navigate("Sign In")}
+          >
+            Sign In
+          </Text>
         </Text>
-      </Text>
-      <StatusBar style="light" />
-    </View>
+        <StatusBar style="light" />
+      </View>
     </LinearGradient>
   );
 }
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     width: 200,
@@ -71,58 +71,57 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
     marginBottom: 16,
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 48,
     paddingHorizontal: 16,
     borderRadius: 4,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: "rgba(255,255,255,0.1)",
     marginVertical: 8,
-    color: '#fff',
+    color: "#fff",
   },
   checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 8,
   },
   checkboxText: {
-    color: '#fff',
+    color: "#fff",
     marginRight: 8,
   },
   checkbox: {
     width: 20,
     height: 20,
     borderRadius: 4,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: "rgba(255,255,255,0.1)",
   },
   orContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 32,
   },
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: "rgba(255,255,255,0.1)",
   },
   orText: {
-    color: '#fff',
+    color: "#fff",
     marginHorizontal: 8,
   },
   microsoftButton: {
     marginVertical: 8,
   },
   navigateText: {
-    color: '#fff',
+    color: "#fff",
     marginTop: 32,
   },
   navigateLink: {
-    color: '#FFD700',
+    color: "#FFD700",
   },
 });
 
 export default SignUp;
-

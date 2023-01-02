@@ -11,38 +11,41 @@ const Stack = createStackNavigator();
 
 function App() {
   return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Welcome" component={Welcome} />
-          <Stack.Screen name="Sign Up" component={SignUp} />
-          <Stack.Screen name="Sign In" component={SignIn} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Sign Up" component={SignUp} />
+        <Stack.Screen name="Sign In" component={SignIn} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const Welcome= props => {
+const Welcome = (props) => {
   return (
-    <LinearGradient colors={['#1E90FF', '#00008B']} style={styles.gradient}>
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to FlashGuard App</Text>
-      <Image source={require("./assets/flashguard.jpg")} style={styles.image} />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Sign Up"
-          onPress={() => props.navigation.navigate("Sign Up")}
+    <LinearGradient colors={["#1E90FF", "#00008B"]} style={styles.gradient}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Welcome to FlashGuard App</Text>
+        <Image
+          source={require("./assets/flashguard.jpg")}
+          style={styles.image}
         />
-        <Button
-          title="Sign In"
-          onPress={() => props.navigation.navigate("Sign In")}
-        />
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Sign Up"
+            onPress={() => props.navigation.navigate("Sign Up")}
+          />
+          <Button
+            title="Sign In"
+            onPress={() => props.navigation.navigate("Sign In")}
+          />
+        </View>
+        <StatusBar style="light" />
       </View>
-      <StatusBar style="light" />
-    </View>
     </LinearGradient>
   );
-}
+};
 
 const styles = StyleSheet.create({
   gradient: {
