@@ -11,7 +11,7 @@ import {
   TableCell,
 } from "react-native";
 
-export function Dashboard() {
+export default function Dashboard() {
   return (
     <View style={styles.container}>
       <View style={styles.upperNav}>
