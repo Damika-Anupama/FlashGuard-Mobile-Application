@@ -6,10 +6,8 @@ import {
   Image,
   Button,
   ScrollView,
-  Table,
-  TableRow,
-  TableCell,
 } from "react-native";
+import { DataTable } from "react-native-paper";
 
 export default function Dashboard() {
   return (
@@ -47,36 +45,32 @@ export default function Dashboard() {
             <Text style={styles.stimulusDetailsTitle}>
               Your Previous Stimulus Details
             </Text>
-            <Table style={styles.stimulusTable}>
-              <TableRow>
-                <TableCell style={styles.tableHeader}>Type</TableCell>
-                <TableCell style={styles.tableHeader}>Frequency</TableCell>
-                <TableCell style={styles.tableHeader}>Duration</TableCell>
-                <TableCell style={styles.tableHeader}>Date and Time</TableCell>
-                <TableCell style={styles.tableHeader}>Intensity</TableCell>
-                <TableCell style={styles.tableHeader}>Location</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell style={styles.tableCell}>Vibration</TableCell>
-                <TableCell style={styles.tableCell}>5 Hz</TableCell>
-                <TableCell style={styles.tableCell}>30 min</TableCell>
-                <TableCell style={styles.tableCell}>
-                  Jan 1, 2021 10:00 AM
-                </TableCell>
-                <TableCell style={styles.tableCell}>50%</TableCell>
-                <TableCell style={styles.tableCell}>Left wrist</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell style={styles.tableCell}>Sound</TableCell>
-                <TableCell style={styles.tableCell}>10 Hz</TableCell>
-                <TableCell style={styles.tableCell}>15 min</TableCell>
-                <TableCell style={styles.tableCell}>
-                  Jan 2, 2021 11:00 AM
-                </TableCell>
-                <TableCell style={styles.tableCell}>70%</TableCell>
-                <TableCell style={styles.tableCell}>Right ear</TableCell>
-              </TableRow>
-            </Table>
+            <DataTable style={styles.table}>
+              <DataTable.Header>
+                <DataTable.Title>Type</DataTable.Title>
+                <DataTable.Title>Frequency</DataTable.Title>
+                <DataTable.Title>Duration</DataTable.Title>
+                <DataTable.Title>Date and Time</DataTable.Title>
+                <DataTable.Title>Intensity</DataTable.Title>
+                <DataTable.Title>Location</DataTable.Title>
+              </DataTable.Header>
+              <DataTable.Row>
+                <DataTable.Cell>Vibration</DataTable.Cell>
+                <DataTable.Cell>5 Hz</DataTable.Cell>
+                <DataTable.Cell>30 min</DataTable.Cell>
+                <DataTable.Cell>Jan 1, 2021 10:00 AM</DataTable.Cell>
+                <DataTable.Cell>50%</DataTable.Cell>
+                <DataTable.Cell>Left wrist</DataTable.Cell>
+              </DataTable.Row>
+              <DataTable.Row>
+                <DataTable.Cell>Sound</DataTable.Cell>
+                <DataTable.Cell>10 Hz</DataTable.Cell>
+                <DataTable.Cell>15 min</DataTable.Cell>
+                <DataTable.Cell>Jan 2, 2021 11:00 AM</DataTable.Cell>
+                <DataTable.Cell>70%</DataTable.Cell>
+                <DataTable.Cell>Right ear</DataTable.Cell>
+              </DataTable.Row>
+            </DataTable>
           </View>
         </View>
       </ScrollView>
@@ -199,16 +193,11 @@ const styles = StyleSheet.create({
   stimulusTable: {
     width: "100%",
   },
-  tableHeader: {
+  table: {
     backgroundColor: "#add8e6",
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#00008B",
   },
-  tableCell: {
-    fontSize: 16,
-    color: "#fff",
-  },
+
   footer: {
     height: 60,
     flexDirection: "row",

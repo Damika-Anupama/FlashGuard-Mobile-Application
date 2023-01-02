@@ -6,19 +6,22 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SignUp from "./pages/SignUp"; // import the SignUp component
 import SignIn from "./pages/SignIn"; // import the SignIn component
 import Dashboard from "./pages/Dashboard"; // import the SignIn component
+import { Provider as PaperProvider } from "react-native-paper";
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Sign Up" component={SignUp} />
-        <Stack.Screen name="Sign In" component={SignIn} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Sign Up" component={SignUp} />
+          <Stack.Screen name="Sign In" component={SignIn} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 

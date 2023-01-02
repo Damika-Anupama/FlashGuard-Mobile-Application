@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "pretty": "prettier --config ./.prettierrc --write \"./**/*.{js,jsx}" 
+    "pretty": "prettier --config ./.prettierrc --write \"./**/*.{js,jsx}"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.1",
@@ -16,7 +16,8 @@
     "expo-linear-gradient": "~12.0.1",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-native": "0.70.5",
+    "react-native-paper": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
