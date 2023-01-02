@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "pretty": "prettier --write \"./**/*.{js,jsx}" 
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.1",
@@ -18,7 +19,8 @@
     "react-native": "0.70.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "prettier": "^2.8.1"
   },
   "private": true
 }
