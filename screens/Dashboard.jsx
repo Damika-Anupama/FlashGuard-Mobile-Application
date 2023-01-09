@@ -1,23 +1,24 @@
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet,
   View,
   Text,
   Image,
   Button,
-  ScrollView,
-} from "react-native";
-import { DataTable } from "react-native-paper";
+  ScrollView
+} from 'react-native';
+import { DataTable } from 'react-native-paper';
+import React from 'react';
 
 export default function Dashboard() {
   return (
     <View style={styles.container}>
       <View style={styles.upperNav}>
         <Image
-          source={require("../assets/notification.png")}
+          source={require('../assets/notification.png')}
           style={styles.notificationIcon}
         />
-        <Image source={require("../assets/exit.png")} style={styles.exitIcon} />
+        <Image source={require('../assets/exit.png')} style={styles.exitIcon} />
       </View>
       <ScrollView style={styles.scrollPane}>
         <View style={styles.mainContent}>
@@ -27,7 +28,7 @@ export default function Dashboard() {
               title="Connect Device"
               icon={
                 <Image
-                  source={require("../assets/bluetooth.png")}
+                  source={require('../assets/bluetooth.png')}
                   style={styles.bluetoothIcon}
                 />
               }
@@ -36,7 +37,7 @@ export default function Dashboard() {
             <View style={styles.deviceStatus}>
               <Text style={styles.deviceStatusText}>Device Status: </Text>
               <Image
-                source={require("../assets/connected.png")}
+                source={require('../assets/connected.png')}
                 style={styles.statusIcon}
               />
             </View>
@@ -79,7 +80,7 @@ export default function Dashboard() {
           title="Home"
           icon={
             <Image
-              source={require("../assets/home.png")}
+              source={require('../assets/home.png')}
               style={styles.footerIcon}
             />
           }
@@ -90,7 +91,7 @@ export default function Dashboard() {
           title="Settings"
           icon={
             <Image
-              source={require("../assets/settings.png")}
+              source={require('../assets/settings.png')}
               style={styles.footerIcon}
             />
           }
@@ -101,7 +102,7 @@ export default function Dashboard() {
           title="Feedback"
           icon={
             <Image
-              source={require("../assets/feedback.png")}
+              source={require('../assets/feedback.png')}
               style={styles.footerIcon}
             />
           }
@@ -112,7 +113,7 @@ export default function Dashboard() {
           title="Additional Details"
           icon={
             <Image
-              source={require("../assets/details.png")}
+              source={require('../assets/details.png')}
               style={styles.footerIcon}
             />
           }
@@ -127,90 +128,90 @@ export default function Dashboard() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   upperNav: {
     height: 60,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    paddingHorizontal: 16,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 16
   },
   notificationIcon: {
     width: 24,
-    height: 24,
+    height: 24
   },
   exitIcon: {
     width: 24,
     height: 24,
-    marginLeft: 16,
+    marginLeft: 16
   },
   scrollPane: {
     flex: 1,
-    backgroundColor: "#00008B",
+    backgroundColor: '#00008B'
   },
   mainContent: {
-    padding: 32,
+    padding: 32
   },
   connectArea: {
-    marginBottom: 32,
+    marginBottom: 32
   },
   connectTitle: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 16
   },
   bluetoothIcon: {
     width: 24,
     height: 24,
-    marginRight: 8,
+    marginRight: 8
   },
   deviceStatus: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8
   },
   deviceStatusText: {
     fontSize: 16,
-    color: "#fff",
+    color: '#fff'
   },
   statusIcon: {
     width: 24,
     height: 24,
-    marginLeft: 8,
+    marginLeft: 8
   },
   stimulusDetails: {
-    marginTop: 32,
+    marginTop: 32
   },
   stimulusDetailsTitle: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 16
   },
   stimulusTable: {
-    width: "100%",
+    width: '100%'
   },
   table: {
-    backgroundColor: "#add8e6",
-    fontSize: 16,
+    backgroundColor: '#add8e6',
+    fontSize: 16
   },
 
   footer: {
     height: 60,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "#fff",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: '#fff'
   },
   footerButton: {
-    flex: 1,
+    flex: 1
   },
   footerIcon: {
     width: 24,
     height: 24,
-    marginRight: 8,
-  },
+    marginRight: 8
+  }
 });
