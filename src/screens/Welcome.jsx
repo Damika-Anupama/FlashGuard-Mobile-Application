@@ -10,10 +10,10 @@ export default function Welcome({ navigation }) {
       <View style={styles.container}>
         <Text style={styles.title}>Welcome to FlashGuard App</Text>
         <Image
-          source={require('../assets/flashguard.jpg')}
+          source={require('../../assets/flashguard.jpg')}
           style={styles.image}
         />
-        <View style={styles.buttonContainer}>
+        <View className="flex-row space-x-3">
           <Button
             onPress={() => navigation.navigate('Sign Up')}
             mode="contained"

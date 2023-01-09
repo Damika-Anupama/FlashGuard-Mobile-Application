@@ -9,10 +9,13 @@ export default function Dashboard() {
     <View style={styles.container}>
       <View style={styles.upperNav}>
         <Image
-          source={require('../assets/notification.png')}
+          source={require('../../assets/notification.png')}
           style={styles.notificationIcon}
         />
-        <Image source={require('../assets/exit.png')} style={styles.exitIcon} />
+        <Image
+          source={require('../../assets/exit.png')}
+          style={styles.exitIcon}
+        />
       </View>
       <ScrollView style={styles.scrollPane}>
         <View style={styles.mainContent}>
@@ -22,7 +25,7 @@ export default function Dashboard() {
               title="Connect Device"
               icon={
                 <Image
-                  source={require('../assets/bluetooth.png')}
+                  source={require('../../assets/bluetooth.png')}
                   style={styles.bluetoothIcon}
                 />
               }
@@ -31,7 +34,7 @@ export default function Dashboard() {
             <View style={styles.deviceStatus}>
               <Text style={styles.deviceStatusText}>Device Status: </Text>
               <Image
-                source={require('../assets/connected.png')}
+                source={require('../../assets/connected.png')}
                 style={styles.statusIcon}
               />
             </View>
@@ -74,7 +77,7 @@ export default function Dashboard() {
           title="Home"
           icon={
             <Image
-              source={require('../assets/home.png')}
+              source={require('../../assets/home.png')}
               style={styles.footerIcon}
             />
           }
@@ -85,7 +88,7 @@ export default function Dashboard() {
           title="Settings"
           icon={
             <Image
-              source={require('../assets/settings.png')}
+              source={require('../../assets/settings.png')}
               style={styles.footerIcon}
             />
           }
@@ -96,7 +99,7 @@ export default function Dashboard() {
           title="Feedback"
           icon={
             <Image
-              source={require('../assets/feedback.png')}
+              source={require('../../assets/feedback.png')}
               style={styles.footerIcon}
             />
           }
@@ -107,7 +110,7 @@ export default function Dashboard() {
           title="Additional Details"
           icon={
             <Image
-              source={require('../assets/details.png')}
+              source={require('../../assets/details.png')}
               style={styles.footerIcon}
             />
           }

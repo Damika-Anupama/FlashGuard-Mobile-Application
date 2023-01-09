@@ -3,15 +3,15 @@ import { StyleSheet, View, TextInput, Image, Text, Button } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 
-function SignUp({ navigation }) {
+function SignIn({ navigation }) {
   return (
     <LinearGradient colors={['#1E90FF', '#00008B']} style={styles.gradient}>
       <View style={styles.container}>
         <Image
-          source={require('../assets/flashguard.jpg')}
+          source={require('../../assets/flashguard.jpg')}
           style={styles.image}
         />
-        <Text style={styles.title}>Sign Up for FlashGuard</Text>
+        <Text style={styles.title}>Sign In for FlashGuard</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -23,12 +23,6 @@ function SignUp({ navigation }) {
           placeholderTextColor="#fff"
           secureTextEntry
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          placeholderTextColor="#fff"
-          secureTextEntry
-        />
         <Button title="Sign Up" onPress={() => {}} />
         <View style={styles.orContainer}>
           <View style={styles.line} />
@@ -36,17 +30,17 @@ function SignUp({ navigation }) {
           <View style={styles.line} />
         </View>
         <Button
-          title="Sign Up with Microsoft"
+          title="Sign In with Microsoft"
           onPress={() => navigation.navigate('Dashboard')}
           style={styles.microsoftButton}
         />
         <Text style={styles.navigateText}>
-          Already have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Text
             style={styles.navigateLink}
-            onPress={() => navigation.navigate('Sign In')}
+            onPress={() => navigation.navigate('Sign Up')}
           >
-            Sign In
+            Sign Up
           </Text>
         </Text>
         <StatusBar style="light" />
@@ -125,4 +119,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SignUp
+export default SignIn
