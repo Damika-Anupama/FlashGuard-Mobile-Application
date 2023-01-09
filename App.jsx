@@ -1,10 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as PaperProvider } from 'react-native-paper';
-import { Welcome } from './screens/Welcome';
-import React from 'react';
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { Provider as PaperProvider } from 'react-native-paper'
+import { Welcome } from './screens/Welcome'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
-  );
+  )
 }
 
-export default App;
+export default App

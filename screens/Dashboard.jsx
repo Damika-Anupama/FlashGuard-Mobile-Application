@@ -1,14 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  Button,
-  ScrollView
-} from 'react-native';
-import { DataTable } from 'react-native-paper';
-import React from 'react';
+import { StatusBar } from 'expo-status-bar'
+
+import { StyleSheet, View, Text, Image, Button, ScrollView } from 'react-native'
+import { DataTable } from 'react-native-paper'
+import React from 'react'
 
 export default function Dashboard() {
   return (
@@ -121,14 +115,15 @@ export default function Dashboard() {
           style={styles.footerButton}
         />
       </View>
+
       <StatusBar style="light" />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   upperNav: {
     height: 60,
@@ -136,67 +131,67 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   notificationIcon: {
     width: 24,
-    height: 24
+    height: 24,
   },
   exitIcon: {
     width: 24,
     height: 24,
-    marginLeft: 16
+    marginLeft: 16,
   },
   scrollPane: {
     flex: 1,
-    backgroundColor: '#00008B'
+    backgroundColor: '#00008B',
   },
   mainContent: {
-    padding: 32
+    padding: 32,
   },
   connectArea: {
-    marginBottom: 32
+    marginBottom: 32,
   },
   connectTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 16
+    marginBottom: 16,
   },
   bluetoothIcon: {
     width: 24,
     height: 24,
-    marginRight: 8
+    marginRight: 8,
   },
   deviceStatus: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8
+    marginTop: 8,
   },
   deviceStatusText: {
     fontSize: 16,
-    color: '#fff'
+    color: '#fff',
   },
   statusIcon: {
     width: 24,
     height: 24,
-    marginLeft: 8
+    marginLeft: 8,
   },
   stimulusDetails: {
-    marginTop: 32
+    marginTop: 32,
   },
   stimulusDetailsTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 16
+    marginBottom: 16,
   },
   stimulusTable: {
-    width: '100%'
+    width: '100%',
   },
   table: {
     backgroundColor: '#add8e6',
-    fontSize: 16
+    fontSize: 16,
   },
 
   footer: {
@@ -204,14 +199,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   footerButton: {
-    flex: 1
+    flex: 1,
   },
   footerIcon: {
     width: 24,
     height: 24,
-    marginRight: 8
-  }
-});
+    marginRight: 8,
+  },
+})

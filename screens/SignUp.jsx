@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, TextInput, Image, Text, Button } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, View, TextInput, Image, Text, Button } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import React from 'react'
 
 function SignUp({ navigation }) {
   return (
@@ -52,29 +52,29 @@ function SignUp({ navigation }) {
         <StatusBar style="light" />
       </View>
     </LinearGradient>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   gradient: {
-    flex: 8
+    flex: 8,
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   image: {
     width: 200,
     height: 200,
     borderRadius: 100,
-    marginBottom: 32
+    marginBottom: 32,
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 16
+    marginBottom: 16,
   },
   input: {
     width: '80%',
@@ -83,46 +83,46 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'rgba(255,255,255,0.1)',
     marginVertical: 8,
-    color: '#fff'
+    color: '#fff',
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8
+    marginVertical: 8,
   },
   checkboxText: {
     color: '#fff',
-    marginRight: 8
+    marginRight: 8,
   },
   checkbox: {
     width: 20,
     height: 20,
     borderRadius: 4,
-    backgroundColor: 'rgba(255,255,255,0.1)'
+    backgroundColor: 'rgba(255,255,255,0.1)',
   },
   orContainer: {
     flexDirection: 'row',
-    marginVertical: 32
+    marginVertical: 32,
   },
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: 'rgba(255,255,255,0.1)'
+    backgroundColor: 'rgba(255,255,255,0.1)',
   },
   orText: {
     color: '#fff',
-    marginHorizontal: 8
+    marginHorizontal: 8,
   },
   microsoftButton: {
-    marginVertical: 8
+    marginVertical: 8,
   },
   navigateText: {
     color: '#fff',
-    marginTop: 32
+    marginTop: 32,
   },
   navigateLink: {
-    color: '#FFD700'
-  }
-});
+    color: '#FFD700',
+  },
+})
 
-export default SignUp;
+export default SignUp

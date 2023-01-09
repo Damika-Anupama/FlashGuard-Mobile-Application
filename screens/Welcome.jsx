@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Button } from 'react-native-paper';
-import React from 'react';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { Button } from 'react-native-paper'
+import React from 'react'
 
-export const Welcome = (props) => {
+export default function Welcome({ navigation }) {
   return (
     <LinearGradient colors={['#1E90FF', '#00008B']} style={styles.gradient}>
       <View style={styles.container}>
@@ -15,13 +15,13 @@ export const Welcome = (props) => {
         />
         <View style={styles.buttonContainer}>
           <Button
-            onPress={() => props.navigation.navigate('Sign Up')}
+            onPress={() => navigation.navigate('Sign Up')}
             mode="contained"
           >
             Sign Up
           </Button>
           <Button
-            onPress={() => props.navigation.navigate('Sign In')}
+            onPress={() => navigation.navigate('Sign In')}
             mode="contained"
           >
             Sign In
@@ -30,32 +30,32 @@ export const Welcome = (props) => {
         <StatusBar style="light" />
       </View>
     </LinearGradient>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   gradient: {
-    flex: 1
+    flex: 1,
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
   },
   image: {
     width: 200,
     height: 200,
     borderRadius: 100,
-    marginVertical: 16
+    marginVertical: 16,
   },
   buttonContainer: {
     flexDirection: 'row',
     marginVertical: 8,
-    margin: 8
-  }
-});
+    margin: 8,
+  },
+})
