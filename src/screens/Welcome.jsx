@@ -1,61 +1,36 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
+import { Image, Text, View } from 'react-native'
 import { Button } from 'react-native-paper'
 import React from 'react'
 
 export default function Welcome({ navigation }) {
+  navigation.setOptions({
+    headerShown: false,
+  })
   return (
-    <LinearGradient colors={['#1E90FF', '#00008B']} style={styles.gradient}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome to FlashGuard App</Text>
+    <View>
+      <View className="flex flex-col items-center justify-center mt-20">
         <Image
+          className="w-40 h-40 "
           source={require('../../assets/flashguard.jpg')}
-          style={styles.image}
         />
-        <View className="flex-row space-x-3">
-          <Button
-            onPress={() => navigation.navigate('Sign Up')}
-            mode="contained"
-          >
-            Sign Up
-          </Button>
-          <Button
-            onPress={() => navigation.navigate('Sign In')}
-            mode="contained"
-          >
-            Sign In
-          </Button>
-        </View>
-        <StatusBar style="light" />
       </View>
-    </LinearGradient>
+
+      <View className="flex flex-col items-center justify-center ">
+        <Text className="text-3xl font-bold">FlashGuard</Text>
+      </View>
+
+      <View className="px-8 space-y-5 mt-40">
+        <Button mode="contained" onPress={() => navigation.navigate('Sign Up')}>
+          Sign Up
+        </Button>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate('Dashboard')}
+          icon="microsoft"
+        >
+          Sign Up with Microsoft
+        </Button>
+      </View>
+    </View>
   )
 }
-
-const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    marginVertical: 16,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 8,
-    margin: 8,
-  },
-})
