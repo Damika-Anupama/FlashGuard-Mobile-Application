@@ -42,7 +42,7 @@ export default function Dashboard() {
   return (
     <ScrollView className="bg-white">
       {/* Graph */}
-      <View className="p-4 m-4 bg-white rounded-md shadow-md shadow-black">
+      <View className="p-4 m-4 bg-white rounded-md shadow shadow-black">
         <Text className="text-lg font">Hazard Level</Text>
         <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
           <VictoryAxis
@@ -54,7 +54,7 @@ export default function Dashboard() {
         </VictoryChart>
       </View>
       {/* Information */}
-      <View className="p-4 m-4 bg-white rounded-md shadow-md shadow-black">
+      <View className="p-4 m-4 bg-white rounded-md shadow shadow-black">
         <Text className="mb-4 text-lg text-gray-600">Statistics for Today</Text>
         <View className="flex flex-row justify-between ">
           <Text className="text-lg">False Positives: </Text>
@@ -66,7 +66,7 @@ export default function Dashboard() {
         </View>
       </View>
       {/* Incidents */}
-      <View className="p-4 m-4 bg-white rounded-md shadow-md shadow-black">
+      <View className="p-4 m-4 bg-white rounded-md shadow shadow-black">
         <Text className="mb-4 text-lg text-gray-600">Feedback</Text>
         <View className="flex space-y-4">
           <Button mode="contained" onPress={() => console.log('pressed')}>
