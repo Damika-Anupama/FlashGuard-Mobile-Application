@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
+import { Button } from 'react-native-paper'
 
 import {
   VictoryAxis,
@@ -39,16 +40,43 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <View className="flex items-center justify-center bg-white">
-      <Text>Dashboard</Text>
-      <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
-        <VictoryAxis
-          tickValues={[1, 2, 3, 4, 5, 6]}
-          tickFormat={(x) => `${x} s`}
-        />
-        <VictoryAxis dependentAxis />
-        <VictoryLine data={data} x="time" y="flashingPixels" />
-      </VictoryChart>
-    </View>
+    <ScrollView className="bg-white">
+      {/* Graph */}
+      <View className="p-4 m-4 bg-white rounded-md shadow-md shadow-black">
+        <Text className="text-lg font">Hazard Level</Text>
+        <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
+          <VictoryAxis
+            tickValues={[1, 2, 3, 4, 5, 6]}
+            tickFormat={(x) => `${x} s`}
+          />
+          <VictoryAxis dependentAxis />
+          <VictoryLine data={data} x="time" y="flashingPixels" />
+        </VictoryChart>
+      </View>
+      {/* Information */}
+      <View className="p-4 m-4 bg-white rounded-md shadow-md shadow-black">
+        <Text className="mb-4 text-lg text-gray-600">Statistics for Today</Text>
+        <View className="flex flex-row justify-between ">
+          <Text className="text-lg">False Positives: </Text>
+          <Text className="text-lg">4</Text>
+        </View>
+        <View className="flex flex-row justify-between text-lg">
+          <Text className="text-lg">False Negatives: </Text>
+          <Text className="text-lg">1</Text>
+        </View>
+      </View>
+      {/* Incidents */}
+      <View className="p-4 m-4 bg-white rounded-md shadow-md shadow-black">
+        <Text className="mb-4 text-lg text-gray-600">Feedback</Text>
+        <View className="flex space-y-4">
+          <Button mode="contained" onPress={() => console.log('pressed')}>
+            Tag False Positive
+          </Button>
+          <Button mode="contained" onPress={() => console.log('pressed')}>
+            Tag False Negative
+          </Button>
+        </View>
+      </View>
+    </ScrollView>
   )
 }
