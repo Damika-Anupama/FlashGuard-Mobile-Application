@@ -6,7 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import Home from './src/screens/Home'
 import Dashboard from './src/screens/Dashboard'
 import Device from './src/screens/Device'
-import Profile from './src/screens/Profile'
+import ProfileStack from './src/screens/ProfileStack'
 
 const Tab = createBottomTabNavigator()
 
@@ -29,7 +29,7 @@ function App() {
       iconName = focused ? 'bar-chart' : 'bar-chart-outline'
     } else if (route.name === 'Device') {
       iconName = focused ? 'glasses' : 'glasses-outline'
-    } else if (route.name === 'Profile') {
+    } else if (route.name === 'ProfileStack') {
       iconName = focused ? 'person' : 'person-outline'
     }
 
@@ -49,7 +49,11 @@ function App() {
           <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="Dashboard" component={Dashboard} />
           <Tab.Screen name="Device" component={Device} />
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen
+            name="ProfileStack"
+            component={ProfileStack}
+            options={{ title: 'Profile', headerShown: false }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </PaperProvider>

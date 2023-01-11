@@ -1,9 +1,11 @@
-import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 import React, { useCallback } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { Avatar, Card, List } from 'react-native-paper'
 
 export default function Profile() {
+  const navigation = useNavigation()
+
   const ListIconRight = useCallback(
     (props) => <List.Icon {...props} icon="chevron-right" />,
     []
@@ -32,10 +34,32 @@ export default function Profile() {
       <View>
         <Card className="m-4 bg-white">
           <Card.Content className="p-2">
-            <List.Item title="Account" description="" right={ListIconRight} />
-            <List.Item title="Settings" description="" right={ListIconRight} />
-            <List.Item title="Help" description="" right={ListIconRight} />
-            <List.Item title="Logout" description="" right={ListIconLogOut} />
+            <List.Item
+              title="Account"
+              description=""
+              right={ListIconRight}
+              onPress={() => {}}
+            />
+            <List.Item
+              title="Settings"
+              description=""
+              right={ListIconRight}
+              onPress={() => {
+                navigation.navigate('Settings')
+              }}
+            />
+            <List.Item
+              title="Help"
+              description=""
+              right={ListIconRight}
+              onPress={() => {}}
+            />
+            <List.Item
+              title="Logout"
+              description=""
+              right={ListIconLogOut}
+              onPress={() => {}}
+            />
           </Card.Content>
         </Card>
       </View>
