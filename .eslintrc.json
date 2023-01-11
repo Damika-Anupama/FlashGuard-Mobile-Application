@@ -15,6 +15,7 @@
     "linebreak-style": 0,
     "no-use-before-define": ["error", { "variables": false }],
     "global-require": 0,
-    "react/style-prop-object": 0
+    "react/style-prop-object": 0,
+    "react/jsx-props-no-spreading": "off"
   }
 }
