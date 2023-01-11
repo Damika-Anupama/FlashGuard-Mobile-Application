@@ -1,6 +1,6 @@
 import React from 'react'
-import { ScrollView, Text, View } from 'react-native'
-import { Button } from 'react-native-paper'
+import { ScrollView, Text } from 'react-native'
+import { Button, Card } from 'react-native-paper'
 
 export default function Device() {
   const handleConnectDevice = () => {
@@ -9,12 +9,14 @@ export default function Device() {
 
   return (
     <ScrollView className="bg-white">
-      <View className="flex items-center justify-center p-4 m-4 space-y-3 bg-white rounded-md shadow shadow-black">
-        <Text className="text-lg text-gray-600">Device not connected</Text>
-        <Button mode="outlined" onPress={() => handleConnectDevice}>
-          Connect Device
-        </Button>
-      </View>
+      <Card mode="elevated" className="m-4 bg-white">
+        <Card.Content className="items-center justify-center space-y-3">
+          <Text className="text-lg text-gray-600">Device not connected</Text>
+          <Button mode="outlined" onPress={() => handleConnectDevice}>
+            Connect Device
+          </Button>
+        </Card.Content>
+      </Card>
     </ScrollView>
   )
 }
