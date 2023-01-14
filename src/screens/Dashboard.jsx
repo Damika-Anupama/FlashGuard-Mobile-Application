@@ -8,6 +8,7 @@ import {
   VictoryLine,
   VictoryTheme,
 } from 'victory-native'
+import FeebackModal from '../components/FeebackModal'
 
 export default function Dashboard() {
   const [data, setData] = useState([
@@ -38,6 +39,9 @@ export default function Dashboard() {
       clearInterval(id)
     }
   }, [])
+
+  // Feedback Modal State
+  const [visible, setVisible] = useState(false)
 
   return (
     <ScrollView className="bg-white">
@@ -76,15 +80,14 @@ export default function Dashboard() {
         <Card.Title title="Feedback" />
         <Card.Content>
           <View className="flex space-y-4">
-            <Button mode="contained" onPress={() => console.log('pressed')}>
-              Tag False Positive
-            </Button>
-            <Button mode="contained" onPress={() => console.log('pressed')}>
-              Tag False Negative
+            <Button mode="contained" onPress={() => setVisible(true)}>
+              Report Recognition Mistake
             </Button>
           </View>
         </Card.Content>
       </Card>
+      {/* Feedback Modal */}
+      <FeebackModal visible={visible} setVisible={setVisible} />
     </ScrollView>
   )
 }
