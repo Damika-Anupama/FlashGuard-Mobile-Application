@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { TimePickerModal } from 'react-native-paper-dates'
 import PropTypes from 'prop-types'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   Button,
   Dialog,
@@ -10,35 +11,63 @@ import {
   RadioButton,
   SegmentedButtons,
 } from 'react-native-paper'
-
-const getCurrentTime = () => {
-  // Function to get current time in {hours, minutes} format
-  const date = new Date()
-  return {
-    hours: date.getHours(),
-    minutes: date.getMinutes(),
-  }
-}
-
-const formatTime = ({ hours, minutes }) => {
-  // Format {hours, minutes} format to system time format AM/PM
-  const ampm = hours >= 12 ? 'PM' : 'AM'
-  return `${hours % 12 || 12}:${minutes} ${ampm}`
-}
+import {
+  feedbackReducer,
+  ACTIONS,
+  initialState,
+} from '../reducers/feedbackReducer'
 
 export default function FeebackModal({ visible, setVisible }) {
-  const hideModal = () => setVisible(false)
-  const [severity, setSeverity] = useState(1)
-  const [errorType, setErrorType] = React.useState(1)
-  const [startTime, setStartTime] = useState(null)
-  const [endTime, setEndTime] = useState(null)
+  const [state, dispatch] = useReducer(feedbackReducer, initialState)
+  const { severity, errorType, startTime, endTime } = state
   const [timePickerVisible, setTimePickerVisible] = useState(false)
+  const [incidents, setIncidents] = useState([])
 
-  // Set current time as start/end time
+  // Save incidents to storage
+  const saveIncidents = async (incident) => {
+    try {
+      await AsyncStorage.setItem('feedbacks', JSON.stringify(incident))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  // Load incidents from storage
+  const loadIncidents = async () => {
+    try {
+      const incidentsString = await AsyncStorage.getItem('feedbacks')
+      if (incidentsString !== null) {
+        setIncidents(JSON.parse(incidentsString))
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const handleSubmit = () => {
+    setVisible(false)
+    const newIncidents = [
+      ...incidents,
+      {
+        ...state,
+        id: incidents.length + 1,
+      },
+    ]
+    setIncidents(newIncidents)
+    saveIncidents(newIncidents)
+  }
+
+  const handleCancel = () => {
+    setVisible(false)
+  }
 
   useEffect(() => {
-    setStartTime(getCurrentTime())
-    setEndTime(getCurrentTime())
+    // Set current time as start/end time
+    dispatch({ type: ACTIONS.SET_START_TIME, payload: new Date() })
+    dispatch({ type: ACTIONS.SET_END_TIME, payload: new Date() })
+
+    // Load feedbacks from storage
+    loadIncidents()
   }, [])
 
   return (
@@ -46,7 +75,7 @@ export default function FeebackModal({ visible, setVisible }) {
       <Dialog
         visible={visible}
         dismissable={false}
-        onDismiss={hideModal}
+        onDismiss={handleCancel}
         className="bg-white "
       >
         <Dialog.Title>
@@ -61,7 +90,7 @@ export default function FeebackModal({ visible, setVisible }) {
             </Text>
             <RadioButton.Group
               onValueChange={(value) => {
-                setErrorType(value)
+                dispatch({ type: ACTIONS.SET_ERROR_TYPE, payload: value })
               }}
               value={errorType}
             >
@@ -112,7 +141,10 @@ export default function FeebackModal({ visible, setVisible }) {
                 visible={timePickerVisible}
                 onDismiss={() => setTimePickerVisible(false)}
                 onConfirm={(time) => {
-                  setStartTime(time)
+                  dispatch({
+                    type: ACTIONS.SET_START_TIME,
+                    payload: convertTimeToDate(time),
+                  })
                   setTimePickerVisible(false)
                 }}
               />
@@ -127,7 +159,9 @@ export default function FeebackModal({ visible, setVisible }) {
             </Text>
             <SegmentedButtons
               value={severity}
-              onValueChange={setSeverity}
+              onValueChange={(value) => {
+                dispatch({ type: ACTIONS.SET_SEVERITY, payload: value })
+              }}
               density="small"
               buttons={[
                 { label: 'Low', value: 1 },
@@ -139,10 +173,10 @@ export default function FeebackModal({ visible, setVisible }) {
         </Dialog.Content>
         <Dialog.Actions>
           <View className="flex flex-row justify-end space-x-3">
-            <Button mode="outlined" onPress={hideModal}>
+            <Button mode="outlined" onPress={handleCancel}>
               Cancel
             </Button>
-            <Button mode="contained" onPress={hideModal}>
+            <Button mode="contained" onPress={handleSubmit}>
               Submit
             </Button>
           </View>
@@ -156,4 +190,22 @@ export default function FeebackModal({ visible, setVisible }) {
 FeebackModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   setVisible: PropTypes.func.isRequired,
+}
+
+const convertTimeToDate = ({ hours, minutes }) => {
+  const date = new Date()
+  date.setHours(hours)
+  date.setMinutes(minutes)
+  return date
+}
+
+const formatTime = (date) => {
+  // Format date to 12 hour time
+
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const ampm = hours >= 12 ? 'pm' : 'am'
+  const hours12 = hours % 12 || 12
+  const minutesFormatted = minutes < 10 ? `0${minutes}` : minutes
+  return `${hours12}:${minutesFormatted} ${ampm}`
 }
