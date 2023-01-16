@@ -44,7 +44,7 @@ export default function Dashboard() {
   )
 
   return (
-    <ScrollView className="bg-white">
+    <ScrollView>
       <Graph />
       <IncidentsContext.Provider value={value}>
         <SubmitFeedback />
