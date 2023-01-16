@@ -1,8 +1,8 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { TimePickerModal } from 'react-native-paper-dates'
 import PropTypes from 'prop-types'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import {
   Button,
   Dialog,
@@ -16,33 +16,16 @@ import {
   ACTIONS,
   initialState,
 } from '../reducers/feedbackReducer'
+import IncidentsContext from '../contexts/IncidentsContext'
 
 export default function FeebackModal({ visible, setVisible }) {
   const [state, dispatch] = useReducer(feedbackReducer, initialState)
   const { severity, errorType, startTime, endTime } = state
   const [timePickerVisible, setTimePickerVisible] = useState(false)
-  const [incidents, setIncidents] = useState([])
+  const [selectedTimeEndpoint, setSelectedTimeEndpoint] = useState(0)
 
-  // Save incidents to storage
-  const saveIncidents = async (incident) => {
-    try {
-      await AsyncStorage.setItem('feedbacks', JSON.stringify(incident))
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  // Load incidents from storage
-  const loadIncidents = async () => {
-    try {
-      const incidentsString = await AsyncStorage.getItem('feedbacks')
-      if (incidentsString !== null) {
-        setIncidents(JSON.parse(incidentsString))
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const { incidents, setIncidents, saveIncidents } =
+    useContext(IncidentsContext)
 
   const handleSubmit = () => {
     setVisible(false)
@@ -65,9 +48,6 @@ export default function FeebackModal({ visible, setVisible }) {
     // Set current time as start/end time
     dispatch({ type: ACTIONS.SET_START_TIME, payload: new Date() })
     dispatch({ type: ACTIONS.SET_END_TIME, payload: new Date() })
-
-    // Load feedbacks from storage
-    loadIncidents()
   }, [])
 
   return (
@@ -118,6 +98,7 @@ export default function FeebackModal({ visible, setVisible }) {
                 <TouchableOpacity
                   onPress={() => {
                     setTimePickerVisible(true)
+                    setSelectedTimeEndpoint(0)
                   }}
                   className="flex flex-row items-center justify-between px-4 py-2 bg-gray-200 rounded-md"
                 >
@@ -130,6 +111,7 @@ export default function FeebackModal({ visible, setVisible }) {
                 <TouchableOpacity
                   onPress={() => {
                     setTimePickerVisible(true)
+                    setSelectedTimeEndpoint(1)
                   }}
                   className="flex flex-row items-center justify-between px-4 py-2 bg-gray-200 rounded-md"
                 >
@@ -142,7 +124,10 @@ export default function FeebackModal({ visible, setVisible }) {
                 onDismiss={() => setTimePickerVisible(false)}
                 onConfirm={(time) => {
                   dispatch({
-                    type: ACTIONS.SET_START_TIME,
+                    type:
+                      selectedTimeEndpoint === 0
+                        ? ACTIONS.SET_START_TIME
+                        : ACTIONS.SET_END_TIME,
                     payload: convertTimeToDate(time),
                   })
                   setTimePickerVisible(false)
