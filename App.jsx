@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import Home from './src/screens/Home'
+import HomeStack from './src/screens/HomeStack'
 import Dashboard from './src/screens/Dashboard'
 import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
@@ -23,7 +23,7 @@ function App() {
   const tabBarIcon = ({ focused, color, size }, route) => {
     let iconName
 
-    if (route.name === 'Home') {
+    if (route.name === 'HomeStack') {
       iconName = focused ? 'home' : 'home-outline'
     } else if (route.name === 'Dashboard') {
       iconName = focused ? 'bar-chart' : 'bar-chart-outline'
@@ -46,7 +46,11 @@ function App() {
             tabBarInactiveTintColor: 'gray',
           })}
         >
-          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen
+            name="HomeStack"
+            component={HomeStack}
+            options={{ title: 'Home', headerShown: false }}
+          />
           <Tab.Screen name="Dashboard" component={Dashboard} />
           <Tab.Screen name="Device" component={Device} />
           <Tab.Screen
