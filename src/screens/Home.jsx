@@ -20,28 +20,39 @@ export default function Home() {
           <Text className="mb-4 text-lg font-bold text-blue-900">
             {getFormattedDate()}
           </Text>
-          <Text className="text-3xl font-bold">Welcome</Text>
+          <Text className="mb-2 text-3xl font-bold">FlashGuard</Text>
+          <Text className="italic text-gray-700">
+            &quot;Preventing seizures, one flash at a time&quot;
+          </Text>
         </Card.Content>
       </Card>
       <Card className="m-4 bg-white" mode="elevated">
         <Card.Content>
-          <Text className="mb-3 text-lg font-bold">Stats for Today</Text>
+          <Text className="mb-2 text-xl font-bold">Stats for Today</Text>
+          <Text className="mb-5 text-gray-700">
+            Your daily stats are displayed below. You can view your more details
+            on incidents in the Dashboard.
+          </Text>
           <View className="flex flex-row justify-between">
-            <Text>Hazards blocked </Text>
-            <Text>133</Text>
+            <Text className="text-lg">Hazards blocked </Text>
+            <Text className="text-lg">133</Text>
           </View>
           <View className="flex flex-row justify-between">
-            <Text>Incidents </Text>
-            <Text>5</Text>
+            <Text className="text-lg">Incidents </Text>
+            <Text className="text-lg">5</Text>
           </View>
         </Card.Content>
       </Card>
       <Card className="m-4 bg-white" mode="elevated">
         <Card.Content>
-          <Text className="mb-3 text-lg font-bold">Device Status</Text>
+          <Text className="mb-3 text-xl font-bold">Device Status</Text>
           <View className="flex flex-row justify-between">
-            <Text>Battery Level: </Text>
-            <Text>93%</Text>
+            <Text className="text-lg">Battery Level: </Text>
+            <Text className="text-lg text-green-700">93%</Text>
+          </View>
+          <View className="flex flex-row justify-between">
+            <Text className="text-lg">Connection Strength</Text>
+            <Text className="text-lg text-orange-600">Medium</Text>
           </View>
         </Card.Content>
       </Card>
