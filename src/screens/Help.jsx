@@ -24,12 +24,11 @@ export default function Help() {
             The core functionality of FlashGuard is to detect possible seizure
             triggers in real-time and darken the glass lens in response. A
             camera fixed to the glasses captures the input and sends it to the
-            microprocessor embedded in the frame. The microprocessor then
-            processes the input data using an algorithm to measure the frequency
-            of changes in color and brightness. If the computed frequencies are
-            within the range of frequencies that trigger seizures, the
-            electro-chromic glass lens will be darkened until the trigger has
-            subsided.
+            microprocessor embedded in the frame. The data is processed using an
+            algorithm to measure the frequency of changes in color and
+            brightness. If the computed frequencies are within the range of
+            frequencies that trigger seizures, the electro-chromic glass lens
+            will be darkened until the trigger has subsided.
           </Text>
         </Card.Content>
       </Card>
