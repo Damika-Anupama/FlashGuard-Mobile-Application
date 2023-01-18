@@ -40,7 +40,7 @@ export default function Incidents() {
         <Text className="mb-4 text-xl font-bold ">Incidents</Text>
         <Text className="mb-2 text-gray-700">
           Here are your reported incidents. These will be used to calibrate and
-          improve your devices detection capabilities.
+          improve your device&apos;s detection capabilities.
         </Text>
         <ScrollView horizontal>
           <DataTable className="w-[20rem]">
