@@ -52,7 +52,9 @@ export default function Profile() {
               title="Help"
               description=""
               right={ListIconRight}
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate('Help')
+              }}
             />
             <List.Item
               title="Logout"
