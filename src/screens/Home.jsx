@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import { format } from 'date-fns'
 import { useNavigation } from '@react-navigation/native'
@@ -17,15 +17,20 @@ export default function Home() {
   const navigation = useNavigation()
 
   return (
-    <View>
+    <ScrollView>
       <Card className="m-4 bg-white" mode="elevated">
         <Card.Content>
-          <Text className="mb-4 text-lg font-bold text-blue-900">
+          <Text className="mb-4 font-bold text-blue-900">
             {getFormattedDate()}
           </Text>
           <Text className="mb-2 text-3xl font-bold">FlashGuard</Text>
-          <Text className="italic text-gray-700">
+          <Text className="mb-4 italic text-gray-700">
             &quot;Preventing seizures, one flash at a time&quot;
+          </Text>
+          <Text>
+            Here you can view your daily stats and device status. You can also
+            view your more details on incidents and real-time status in the
+            Dashboard.
           </Text>
         </Card.Content>
       </Card>
@@ -75,6 +80,6 @@ export default function Home() {
           </Button>
         </Card.Content>
       </Card>
-    </View>
+    </ScrollView>
   )
 }
