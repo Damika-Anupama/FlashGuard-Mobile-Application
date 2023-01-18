@@ -10,6 +10,10 @@ export default function SubmitFeedback() {
       <Card className="m-4 bg-white">
         <Card.Content>
           <Text className="mb-4 text-xl font-bold">Feedback</Text>
+          <Text className="mb-4 text-gray-700">
+            Did the glasses darken as expected or not? Please provide us with
+            your feedback to improve your device&apos;s detection capabilities.
+          </Text>
           <View className="flex space-y-4">
             <Button mode="contained" onPress={() => setVisible(true)}>
               Report Recognition Mistake
