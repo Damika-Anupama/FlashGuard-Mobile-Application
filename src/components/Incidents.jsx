@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { Card, DataTable } from 'react-native-paper'
 import IncidentsContext from '../contexts/IncidentsContext'
@@ -36,8 +36,8 @@ export default function Incidents() {
 
   return (
     <Card className="m-4 bg-white">
-      <Card.Title title="Incidents" />
       <Card.Content>
+        <Text className="mb-4 text-2xl font-bold">Incidents</Text>
         <ScrollView horizontal>
           <DataTable className="w-[20rem]">
             <DataTable.Header>
