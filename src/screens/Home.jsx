@@ -3,8 +3,8 @@ import { Text, View } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import { format } from 'date-fns'
 import { useNavigation } from '@react-navigation/native'
-import ConnectionContext from '../contexts/ConnectionContext'
 import { Ionicons } from '@expo/vector-icons'
+import ConnectionContext from '../contexts/ConnectionContext'
 
 const getFormattedDate = () => {
   // Function to return date as Sunday, 1st January
