@@ -34,27 +34,12 @@ export default function Incidents() {
   const from = page * numberOfItemsPerPage
   const to = Math.min((page + 1) * numberOfItemsPerPage, incidents.length)
 
-  // const loadIncidents = async () => {
-  //   try {
-  //     const incidentsString = await AsyncStorage.getItem('feedbacks')
-  //     if (incidentsString !== null) {
-  //       setIncidents(JSON.parse(incidentsString))
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   loadIncidents()
-  // }, [])
-
   return (
     <Card className="m-4 bg-white">
       <Card.Title title="Incidents" />
       <Card.Content>
         <ScrollView horizontal>
-          <DataTable className="w-96">
+          <DataTable className="w-[20rem]">
             <DataTable.Header>
               <DataTable.Title>Date</DataTable.Title>
               <DataTable.Title>Type</DataTable.Title>
