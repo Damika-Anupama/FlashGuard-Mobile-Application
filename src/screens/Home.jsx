@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Text, View } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import { format } from 'date-fns'
 import { useNavigation } from '@react-navigation/native'
+import ConnectionContext from '../contexts/ConnectionContext'
+import { Ionicons } from '@expo/vector-icons'
 
 const getFormattedDate = () => {
   // Function to return date as Sunday, 1st January
@@ -11,6 +13,7 @@ const getFormattedDate = () => {
 }
 
 export default function Home() {
+  const { connected } = useContext(ConnectionContext)
   const navigation = useNavigation()
 
   return (
@@ -45,15 +48,19 @@ export default function Home() {
       </Card>
       <Card className="m-4 bg-white" mode="elevated">
         <Card.Content>
-          <Text className="mb-3 text-xl font-bold">Device Status</Text>
-          <View className="flex flex-row justify-between">
-            <Text className="text-lg">Battery Level: </Text>
-            <Text className="text-lg text-green-700">93%</Text>
+          <View className="flex flex-row items-center justify-between pr-2 mb-3">
+            <Text className="text-xl font-bold">Device Status </Text>
+            {connected ? (
+              <Ionicons name="checkmark-circle" size={24} color="green" />
+            ) : (
+              <Ionicons name="close-circle" size={24} color="orange" />
+            )}
           </View>
-          <View className="flex flex-row justify-between">
-            <Text className="text-lg">Connection Strength</Text>
-            <Text className="text-lg text-orange-600">Medium</Text>
-          </View>
+          <Text className="mb-5 text-gray-700">
+            {connected
+              ? 'Your device is currently connected and ready to use.'
+              : 'Your device is currently disconnected. Go to the Device tab to connect your device.'}
+          </Text>
         </Card.Content>
       </Card>
       <Card className="m-4 bg-white" mode="elevated">

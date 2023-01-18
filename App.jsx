@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper'
@@ -7,6 +7,7 @@ import HomeStack from './src/screens/HomeStack'
 import Dashboard from './src/screens/Dashboard'
 import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
+import ConnectionContext from './src/contexts/ConnectionContext'
 
 const Tab = createBottomTabNavigator()
 
@@ -20,6 +21,15 @@ const theme = {
 }
 
 function App() {
+  const [connected, setConnected] = useState(false)
+  const value = useMemo(
+    () => ({
+      connected,
+      setConnected,
+    }),
+    [connected]
+  )
+
   const tabBarIcon = ({ focused, color, size }, route) => {
     let iconName
 
@@ -38,28 +48,30 @@ function App() {
   }
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: (props) => tabBarIcon(props, route),
-            tabBarActiveTintColor: 'tomato',
-            tabBarInactiveTintColor: 'gray',
-          })}
-        >
-          <Tab.Screen
-            name="HomeStack"
-            component={HomeStack}
-            options={{ title: 'Home', headerShown: false }}
-          />
-          <Tab.Screen name="Dashboard" component={Dashboard} />
-          <Tab.Screen name="Device" component={Device} />
-          <Tab.Screen
-            name="ProfileStack"
-            component={ProfileStack}
-            options={{ title: 'Profile', headerShown: false }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <ConnectionContext.Provider value={value}>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: (props) => tabBarIcon(props, route),
+              tabBarActiveTintColor: 'tomato',
+              tabBarInactiveTintColor: 'gray',
+            })}
+          >
+            <Tab.Screen
+              name="HomeStack"
+              component={HomeStack}
+              options={{ title: 'Home', headerShown: false }}
+            />
+            <Tab.Screen name="Dashboard" component={Dashboard} />
+            <Tab.Screen name="Device" component={Device} />
+            <Tab.Screen
+              name="ProfileStack"
+              component={ProfileStack}
+              options={{ title: 'Profile', headerShown: false }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ConnectionContext.Provider>
     </PaperProvider>
   )
 }
