@@ -37,7 +37,7 @@ export default function Incidents() {
   return (
     <Card className="m-4 bg-white">
       <Card.Content>
-        <Text className="mb-4 text-2xl font-bold">Incidents</Text>
+        <Text className="mb-4 text-xl font-bold">Incidents</Text>
         <ScrollView horizontal>
           <DataTable className="w-[20rem]">
             <DataTable.Header>

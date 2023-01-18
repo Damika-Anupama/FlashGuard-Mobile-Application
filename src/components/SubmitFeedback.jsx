@@ -9,7 +9,7 @@ export default function SubmitFeedback() {
     <>
       <Card className="m-4 bg-white">
         <Card.Content>
-          <Text className="mb-4 text-2xl font-bold">Feedback</Text>
+          <Text className="mb-4 text-xl font-bold">Feedback</Text>
           <View className="flex space-y-4">
             <Button mode="contained" onPress={() => setVisible(true)}>
               Report Recognition Mistake
