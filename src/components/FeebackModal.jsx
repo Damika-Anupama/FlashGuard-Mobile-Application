@@ -76,11 +76,11 @@ export default function FeebackModal({ visible, setVisible }) {
             >
               <View className="flex flex-row items-center ">
                 <RadioButton value={1} />
-                <Text>The glasses darkened unexpectedly</Text>
+                <Text>The glasses darkened unexpectedly (FP)</Text>
               </View>
               <View className="flex flex-row items-center ">
                 <RadioButton value={2} />
-                <Text>The glasses didn&apos;t darken</Text>
+                <Text>The glasses didn&apos;t darken (FN)</Text>
               </View>
             </RadioButton.Group>
           </View>
