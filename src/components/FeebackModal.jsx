@@ -30,11 +30,11 @@ export default function FeebackModal({ visible, setVisible }) {
   const handleSubmit = () => {
     setVisible(false)
     const newIncidents = [
-      ...incidents,
       {
         ...state,
         id: incidents.length + 1,
       },
+      ...incidents,
     ]
     setIncidents(newIncidents)
     saveIncidents(newIncidents)
