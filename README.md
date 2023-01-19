@@ -1,5 +1,7 @@
 # FlashGuard: Real-Time Protection from Photosensitive Epileptic Seizures
 
+## Background
+
 Epilepsy is the most common chronic brain disease, affecting more than 50 million people worldwide. Of those affected, 5% have a particular form of epilepsy called photosensitive epilepsy, in which seizures are triggered by visual stimuli such as flashing lights or rapidly changing images. While photosensitive epilepsy has been extensively studied in neurology, little has been done to prevent hazardous triggers in real-time.
 
 We present FlashGuard, a method to prevent photosensitive epileptic seizures through a pair of glasses that will detect a visual stimulus which can trigger a seizure in real-time and darken the lenses to protect the user from hazardous exposure to visual stimuli.
