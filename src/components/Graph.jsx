@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Text } from 'react-native'
 import { Card } from 'react-native-paper'
 import {
@@ -7,8 +7,11 @@ import {
   VictoryLine,
   VictoryTheme,
 } from 'victory-native'
+import ConnectionContext from '../contexts/ConnectionContext'
 
 export default function Graph() {
+  const { connected } = useContext(ConnectionContext)
+
   const [data, setData] = useState([
     { time: 1, flashingPixels: 13 },
     { time: 2, flashingPixels: 16 },
@@ -65,13 +68,15 @@ export default function Graph() {
               axisLabel: { padding: 40 },
             }}
           />
-          <VictoryLine
-            data={data}
-            x="time"
-            y="flashingPixels"
-            style={{ data: { strokeWidth: 3 } }}
-            interpolation="natural"
-          />
+          {connected ? (
+            <VictoryLine
+              data={data}
+              x="time"
+              y="flashingPixels"
+              style={{ data: { strokeWidth: 3 } }}
+              interpolation="natural"
+            />
+          ) : null}
           {/* Threshold line */}
           <VictoryLine
             data={[
