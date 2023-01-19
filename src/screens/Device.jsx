@@ -18,7 +18,7 @@ export default function Device() {
         setLoading(false)
         setConnected(true)
         console.log('Device connected')
-      }, 3000)
+      }, 1000)
     }
   }
 
