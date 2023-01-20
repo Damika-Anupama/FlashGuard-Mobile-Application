@@ -47,12 +47,10 @@ export default function Home() {
             {getFormattedDate()}
           </Text>
           <Text className="mb-2 text-3xl font-bold">FlashGuard</Text>
-          <Text className="mb-4 italic text-gray-700">
-            &quot;Preventing seizures, one flash at a time&quot;
-          </Text>
-          <Text>
+
+          <Text className="mb-2 text-gray-700">
             Here you can view your daily stats and device status. You can also
-            view your more details on incidents and real-time status in the
+            view more details on incidents and real-time status in the
             Dashboard.
           </Text>
         </Card.Content>
@@ -61,8 +59,7 @@ export default function Home() {
         <Card.Content>
           <Text className="mb-2 text-xl font-bold">Stats for Today</Text>
           <Text className="mb-5 text-gray-700">
-            Your daily stats are displayed below. You can view your more details
-            on incidents in the Dashboard.
+            Your daily stats are displayed below.
           </Text>
           <View className="flex flex-row justify-between">
             <Text className="text-lg">Hazards blocked </Text>

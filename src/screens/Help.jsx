@@ -11,9 +11,9 @@ export default function Help() {
           <Text>
             Welcome to the FlashGuard Help Page! FlashGuard is a medical device
             mobile app that aims to provide real-time protection from
-            photosensitive epileptic seizures. Our device uses a pair of glasses
-            that detect visual stimuli that can trigger a seizure and darken the
-            lenses to protect the user from hazardous exposure.
+            photosensitive epileptic seizures. The Camera in the FlashGuard
+            glasses detects visual stimuli that can trigger a seizure and
+            darkens the lenses to protect the user from hazardous exposure.
           </Text>
         </Card.Content>
       </Card>
