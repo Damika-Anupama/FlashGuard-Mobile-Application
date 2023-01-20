@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { StatusBar } from 'expo-status-bar'
 import HomeStack from './src/screens/HomeStack'
 import Dashboard from './src/screens/Dashboard'
 import Device from './src/screens/Device'
@@ -110,6 +111,7 @@ function App() {
           </NavigationContainer>
         </IncidentsContext.Provider>
       </ConnectionContext.Provider>
+      <StatusBar style="dark" />
     </PaperProvider>
   )
 }
