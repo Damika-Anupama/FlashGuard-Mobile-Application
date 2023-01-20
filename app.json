@@ -15,7 +15,9 @@
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -23,14 +25,15 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F9F9F9"
-      }
+      },
+      "package": "com.flashguard.flashguardapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "d9c3efe7-9c4c-4acd-9654-fdd49286582d"
+        "projectId": "386dc9bf-1535-4c22-9eed-462c161893e2"
       }
     }
   }
