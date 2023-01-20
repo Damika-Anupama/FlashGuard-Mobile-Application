@@ -55,7 +55,7 @@ export default function Incidents() {
               <DataTable.Row key={incident.id}>
                 <DataTable.Cell>{formatDate(incident.endTime)}</DataTable.Cell>
                 <DataTable.Cell>
-                  {incident.errorType === 1 ? 'FN' : 'FP'}
+                  {incident.errorType === 1 ? 'FP' : 'FN'}
                 </DataTable.Cell>
                 <DataTable.Cell>
                   {formatTime(incident.startTime)}
