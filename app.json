@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FlashGuard-Mobile-Application",
-    "slug": "FlashGuard-Mobile-Application",
+    "name": "FlashGuard",
+    "slug": "flashguard",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,11 +9,12 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F9F9F9"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "jsEngine": "hermes",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -23,11 +24,17 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#F9F9F9"
+      },
+      "package": "com.flashguard.flashguardapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "73ed88fd-3812-4b42-8a18-e17043ad75d2"
+      }
     }
   }
 }
