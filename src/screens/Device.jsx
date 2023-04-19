@@ -1,19 +1,43 @@
 import React, { useContext, useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { Button, Card } from 'react-native-paper'
+import DeviceModal from "../model/DeviceConnectionModal";
 import ConnectionContext from '../contexts/ConnectionContext'
+import useBLE from '../service/useBLE'
 
 export default function Device() {
   const { connected, setConnected } = useContext(ConnectionContext)
   const [loading, setLoading] = useState(false)
+  const {
+    requestPermissions,
+    scanForPeripherals, 
+    // allDevices
+  } = useBLE()
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  // const scanForDevices = async () => {
+  //   const isPermissionsEnabled = await requestPermissions();
+  //   if (isPermissionsEnabled) {
+  //     scanForPeripherals();
+  //   }
+  // };
+  const hideModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const openModal = async () => {
+    // scanForDevices();
+    setIsModalVisible(true);
+  };
   const handleConnectDevice = () => {
+    openModal();
     if (connected) {
       setConnected(false)
       console.log('Device disconnected')
     } else {
       setLoading(true)
       console.log('Connecting device')
+      useBLE.requestPermissions();
       setTimeout(() => {
         setLoading(false)
         setConnected(true)
@@ -46,6 +70,13 @@ export default function Device() {
           </Button>
         </Card.Content>
       </Card>
+
+      <DeviceModal
+        closeModal={hideModal}
+        visible={isModalVisible}
+        connectToPeripheral={() =>{}}
+        devices={[]}
+      />  
 
       {connected ? (
         <Card className="m-4 bg-white " mode="elevated">
