@@ -1,24 +1,88 @@
-import React, { useContext, useState } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { ScrollView, Text, View, PermissionsAndroid } from 'react-native'
 import { Button, Card } from 'react-native-paper'
+import { BleManager } from 'react-native-ble-plx'
+import eachDayOfInterval from 'date-fns/eachDayOfInterval'
+
 import ConnectionContext from '../contexts/ConnectionContext'
+
+const requestPermissions = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+    )
+
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('Permissions granted')
+    } else {
+      console.warn('Permissions not granted')
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+}
+const bleManager = new BleManager()
 
 export default function Device() {
   const { connected, setConnected } = useContext(ConnectionContext)
   const [loading, setLoading] = useState(false)
+  const [targetDevice, setTargetDevice] = useState(null)
+  const targetDeviceName = 'MSI'
 
-  const handleConnectDevice = () => {
-    if (connected) {
-      setConnected(false)
-      console.log('Device disconnected')
-    } else {
-      setLoading(true)
-      console.log('Connecting device')
-      setTimeout(() => {
-        setLoading(false)
-        setConnected(true)
-        console.log('Device connected')
-      }, 1000)
+  useEffect(() => {
+    setLoading(false)
+    bleManager.stopDeviceScan()
+    requestPermissions()
+  }, [])
+
+  const handleConnectDevice = async () => {
+    if (!bleManager) return
+    console.log('clicked')
+    setLoading(true)
+
+    if (!connected) {
+      bleManager.startDeviceScan(null, null, (error, device) => {
+        console.log('Scanning...', device.id)
+        if (error) {
+          console.error(JSON.stringify(error))
+          setLoading(false)
+          return
+        }
+
+        // Check if the found device is the one you want to connect to
+        if (
+          device.name === targetDeviceName ||
+          device.localName === targetDeviceName
+        ) {
+          bleManager.stopDeviceScan()
+
+          // Connect to the device
+          device
+            .connect()
+            .then((connectedDevice) => {
+              setTargetDevice(connectedDevice)
+              setConnected(true)
+            })
+            .catch(() => {
+              console.error('Connection error:', eachDayOfInterval)
+            })
+            .finally(() => {
+              setLoading(false)
+            })
+        }
+      })
+    } else if (targetDevice) {
+      targetDevice
+        .cancelConnection()
+        .then(() => {
+          setConnected(false)
+        })
+        .catch((error) => {
+          console.error('Disconnection error:', error)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     }
   }
 

@@ -26,7 +26,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F9F9F9"
       },
-      "package": "com.flashguard.flashguardapp"
+      "package": "com.flashguard.flashguardapp",
+      "permissions": ["ACCESS_FINE_LOCATION", "BLUETOOTH", "BLUETOOTH_ADMIN"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
