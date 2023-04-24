@@ -15,9 +15,9 @@
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "plugins": ["@config-plugins/react-native-ble-plx"],
+
     "ios": {
       "supportsTablet": true
     },
