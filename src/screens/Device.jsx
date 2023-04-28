@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { ScrollView, Text, View, PermissionsAndroid } from 'react-native'
 import { Button, Card } from 'react-native-paper'
-import eachDayOfInterval from 'date-fns/eachDayOfInterval'
+import RNBluetoothClassic from 'react-native-bluetooth-classic'
 import ConnectionContext from '../contexts/ConnectionContext'
 
 const requestPermissions = async () => {
@@ -24,7 +24,28 @@ export default function Device() {
   const { connected, setConnected } = useContext(ConnectionContext)
   const [loading, setLoading] = useState(false)
 
-  const handleConnectDevice = async () => {}
+  const connect = async () => {
+    const paired = await RNBluetoothClassic.getBondedDevices()
+    const device = paired[0]
+
+    let connection = await device.isConnected()
+    if (!connection) {
+      connection = await device.connect()
+    }
+
+    device.onDataReceived((data) => {
+      console.log(data)
+    })
+  }
+
+  const handleConnectDevice = async () => {
+    await requestPermissions()
+    setLoading(true)
+    connect().then(() => {
+      setConnected(true)
+      setLoading(false)
+    })
+  }
 
   let buttonText = 'Connect Device'
   if (loading) {
