@@ -16,7 +16,6 @@
     },
     "jsEngine": "hermes",
     "assetBundlePatterns": ["**/*"],
-    "plugins": ["@config-plugins/react-native-ble-plx"],
 
     "ios": {
       "supportsTablet": true
@@ -27,7 +26,7 @@
         "backgroundColor": "#F9F9F9"
       },
       "package": "com.flashguard.flashguardapp",
-      "permissions": ["ACCESS_FINE_LOCATION", "BLUETOOTH", "BLUETOOTH_ADMIN"]
+      "permissions": ["ACCESS_FINE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
