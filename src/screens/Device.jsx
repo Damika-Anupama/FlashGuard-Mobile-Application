@@ -52,22 +52,22 @@ export default function Device() {
   }
 
   // Mock plot data by calling plotData() every 2 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      plotData()
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     plotData()
+  //   }, 2000)
+  //   return () => clearInterval(interval)
+  // }, [])
 
   const handleConnectDevice = async () => {
     await requestPermissions()
-    // setLoading(true)
+    setLoading(true)
     setConnected(true)
 
-    // connect().then(() => {
-    // setConnected(true)
-    // setLoading(false)
-    // })
+    connect().then(() => {
+      setConnected(true)
+      setLoading(false)
+    })
   }
 
   let buttonText = 'Connect Device'
