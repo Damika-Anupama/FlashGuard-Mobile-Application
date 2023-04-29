@@ -4,8 +4,10 @@ import { LineChart, Grid, YAxis } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
 import HazardDetectedContext from '../contexts/HazardDetectedContext'
 
+const yAxisData = [0, 25, 50, 75, 100]
+const windowSize = 30
+
 function RealTimeGraph() {
-  const windowSize = 30
   const [data, setData] = useState(Array(windowSize).fill(0))
   const { hazardDetected, setHazardDetected } = useContext(
     HazardDetectedContext
@@ -14,7 +16,7 @@ function RealTimeGraph() {
   useEffect(() => {
     const interval = setInterval(() => {
       setData((prevData) => {
-        const newData = prevData.concat(hazardDetected ? 100 : 0)
+        const newData = prevData.concat(0)
         if (newData.length > windowSize) {
           newData.shift()
         }
@@ -23,9 +25,21 @@ function RealTimeGraph() {
       setHazardDetected(false)
     }, 100)
     return () => clearInterval(interval)
-  }, [hazardDetected])
+  }, [])
 
-  const yAxisData = [0, 25, 50, 75, 100]
+  useEffect(() => {
+    if (hazardDetected) {
+      setData((prevData) => {
+        if (prevData.length <= 1) {
+          return prevData
+        }
+        const newData = [...prevData]
+        newData[newData.length - 1] = 100
+        return newData
+      })
+      setHazardDetected(false)
+    }
+  }, [hazardDetected])
 
   return (
     <View style={styles.container}>
