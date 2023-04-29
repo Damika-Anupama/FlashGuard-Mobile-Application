@@ -1,49 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text } from 'react-native'
 import { Card } from 'react-native-paper'
-import {
-  VictoryAxis,
-  VictoryChart,
-  VictoryLine,
-  VictoryTheme,
-} from 'victory-native'
 import ConnectionContext from '../contexts/ConnectionContext'
 
 export default function Graph() {
-  const { connected } = useContext(ConnectionContext)
+  // const { connected } = useContext(ConnectionContext)
 
-  const [data, setData] = useState([
-    { time: 1, flashingPixels: 13 },
-    { time: 2, flashingPixels: 16 },
-    { time: 3, flashingPixels: 14 },
-    { time: 4, flashingPixels: 13 },
-    { time: 5, flashingPixels: 15 },
-    { time: 6, flashingPixels: 10 },
-    { time: 7, flashingPixels: 20 },
-    { time: 8, flashingPixels: 15 },
-    { time: 9, flashingPixels: 10 },
-    { time: 10, flashingPixels: 20 },
-  ])
-
-  const handleUpdateData = () => {
-    // Add random data for now
-    setData((prevData) => [
-      ...prevData
-        .map(({ time, flashingPixels }) => ({
-          time: time - 1,
-          flashingPixels,
-        }))
-        .slice(-prevData.length + 1),
-      { time: prevData.length, flashingPixels: (Math.random() + 1) * 20 },
-    ])
-  }
-
-  useEffect(() => {
-    const id = setInterval(handleUpdateData, 200)
-    return () => {
-      clearInterval(id)
-    }
-  }, [])
   return (
     <Card className="m-4 bg-white" mode="elevated">
       <Card.Content>
@@ -53,8 +15,7 @@ export default function Graph() {
           hazard level reaches the danger threshold, the glasses will darken
           immediately.
         </Text>
-
-        <VictoryChart
+        {/* <VictoryChart
           className="p-0"
           domainPadding={{ x: 20, y: 20 }}
           domain={{ y: [0, 100] }}
@@ -78,22 +39,22 @@ export default function Graph() {
             />
           ) : null}
           {/* Threshold line */}
-          <VictoryLine
-            data={[
-              { x: 10, y: 80 },
-              { x: 0, y: 80 },
-            ]}
-            style={{ data: { stroke: '#F65427' } }}
-            standalone={false}
-          />
-          <VictoryLine
-            data={[
-              { x: 10, y: 0 },
-              { x: 0, y: 0 },
-            ]}
-            standalone={false}
-          />
-        </VictoryChart>
+        {/* <VictoryLine
+          data={[
+            { x: 10, y: 80 },
+            { x: 0, y: 80 },
+          ]}
+          style={{ data: { stroke: '#F65427' } }}
+          standalone={false}
+        />
+        <VictoryLine
+          data={[
+            { x: 10, y: 0 },
+            { x: 0, y: 0 },
+          ]}
+          standalone={false}
+        /> */}
+        {/* </VictoryChart> */}
       </Card.Content>
     </Card>
   )

@@ -1,0 +1,1 @@
+{"data": "Flashing detected,Flashing frequency,3.7147347393003867,0.0", "device": {"address": "B8:27:EB:B0:DF:50", "bonded": true, "deviceClass": {"deviceClass": 0, "majorClass": 0}, "extra": {}, "id": "B8:27:EB:B0:DF:50", "name": "raspberrypi"}, "timestamp": "2023-04-28T18:44:35.788Z"}

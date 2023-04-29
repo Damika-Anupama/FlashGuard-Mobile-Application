@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ScrollView, Text, View, PermissionsAndroid } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import RNBluetoothClassic from 'react-native-bluetooth-classic'
@@ -29,22 +29,33 @@ export default function Device() {
     const device = paired[0]
 
     let connection = await device.isConnected()
+
     if (!connection) {
+      console.log('Connecting')
       connection = await device.connect()
     }
 
+    console.log('Connected')
+
     device.onDataReceived((data) => {
       console.log(data)
+      plotData()
     })
+  }
+
+  const plotData = () => {
+    console.log('Flash detected')
   }
 
   const handleConnectDevice = async () => {
     await requestPermissions()
-    setLoading(true)
-    connect().then(() => {
-      setConnected(true)
-      setLoading(false)
-    })
+    // setLoading(true)
+    setConnected(true)
+
+    // connect().then(() => {
+    // setConnected(true)
+    // setLoading(false)
+    // })
   }
 
   let buttonText = 'Connect Device'
