@@ -11,6 +11,7 @@ import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
 import ConnectionContext from './src/contexts/ConnectionContext'
 import IncidentsContext from './src/contexts/IncidentsContext'
+import HazardDetectedContext from './src/contexts/HazardDetectedContext'
 
 const Tab = createBottomTabNavigator()
 
@@ -50,6 +51,15 @@ function App() {
   )
 
   const [incidents, setIncidents] = useState([])
+  const [hazardDetected, setHazardDetected] = useState(false)
+
+  const hazardDetectedValue = useMemo(
+    () => ({
+      hazardDetected,
+      setHazardDetected,
+    }),
+    [hazardDetected]
+  )
 
   // Save incidents to storage
   const saveIncidents = async (incident) => {
@@ -87,28 +97,30 @@ function App() {
     <PaperProvider theme={theme}>
       <ConnectionContext.Provider value={connectedValue}>
         <IncidentsContext.Provider value={incidentsValue}>
-          <NavigationContainer>
-            <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: (props) => tabBarIcon(props, route),
-                tabBarActiveTintColor: 'tomato',
-                tabBarInactiveTintColor: 'gray',
-              })}
-            >
-              <Tab.Screen
-                name="HomeStack"
-                component={HomeStack}
-                options={{ title: 'Home', headerShown: false }}
-              />
-              <Tab.Screen name="Dashboard" component={Dashboard} />
-              <Tab.Screen name="Device" component={Device} />
-              <Tab.Screen
-                name="ProfileStack"
-                component={ProfileStack}
-                options={{ title: 'Profile', headerShown: false }}
-              />
-            </Tab.Navigator>
-          </NavigationContainer>
+          <HazardDetectedContext.Provider value={hazardDetectedValue}>
+            <NavigationContainer>
+              <Tab.Navigator
+                screenOptions={({ route }) => ({
+                  tabBarIcon: (props) => tabBarIcon(props, route),
+                  tabBarActiveTintColor: 'tomato',
+                  tabBarInactiveTintColor: 'gray',
+                })}
+              >
+                <Tab.Screen
+                  name="HomeStack"
+                  component={HomeStack}
+                  options={{ title: 'Home', headerShown: false }}
+                />
+                <Tab.Screen name="Dashboard" component={Dashboard} />
+                <Tab.Screen name="Device" component={Device} />
+                <Tab.Screen
+                  name="ProfileStack"
+                  component={ProfileStack}
+                  options={{ title: 'Profile', headerShown: false }}
+                />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </HazardDetectedContext.Provider>
         </IncidentsContext.Provider>
       </ConnectionContext.Provider>
       <StatusBar style="dark" />

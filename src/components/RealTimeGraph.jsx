@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
+import { View, StyleSheet } from 'react-native'
 import { LineChart, Grid, YAxis } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
+import HazardDetectedContext from '../contexts/HazardDetectedContext'
 
 function RealTimeGraph() {
   const windowSize = 30
   const [data, setData] = useState(Array(windowSize).fill(0))
-  const [time, setTime] = useState(0)
-  const [spike, setSpike] = useState(false)
+  const { hazardDetected, setHazardDetected } = useContext(
+    HazardDetectedContext
+  )
 
   useEffect(() => {
     const interval = setInterval(() => {
       setData((prevData) => {
-        const newData = prevData.concat(spike ? 100 : 0)
+        const newData = prevData.concat(hazardDetected ? 100 : 0)
         if (newData.length > windowSize) {
           newData.shift()
         }
         return newData
       })
-      setTime((prevTime) => prevTime + 1)
-      setSpike(false)
+      setHazardDetected(false)
     }, 100)
     return () => clearInterval(interval)
-  }, [spike])
-
-  const fireEventHandler = () => {
-    setSpike(true)
-  }
+  }, [hazardDetected])
 
   const yAxisData = [0, 25, 50, 75, 100]
 
@@ -49,13 +46,11 @@ function RealTimeGraph() {
           curve={shape.curveBasis}
           svg={{ stroke: '#2370FF', strokeWidth: 2 }}
           contentInset={{ top: 20, bottom: 20 }}
+          gridMin={100}
         >
           <Grid />
         </LineChart>
       </View>
-      <TouchableOpacity style={styles.button} onPress={fireEventHandler}>
-        <Text style={styles.buttonText}>Fire event</Text>
-      </TouchableOpacity>
     </View>
   )
 }

@@ -3,6 +3,7 @@ import { ScrollView, Text, View, PermissionsAndroid } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import RNBluetoothClassic from 'react-native-bluetooth-classic'
 import ConnectionContext from '../contexts/ConnectionContext'
+import HazardDetectedContext from '../contexts/HazardDetectedContext'
 
 const requestPermissions = async () => {
   try {
@@ -22,6 +23,9 @@ const requestPermissions = async () => {
 
 export default function Device() {
   const { connected, setConnected } = useContext(ConnectionContext)
+  const { hazardDetected, setHazardDetected } = useContext(
+    HazardDetectedContext
+  )
   const [loading, setLoading] = useState(false)
 
   const connect = async () => {
@@ -44,8 +48,16 @@ export default function Device() {
   }
 
   const plotData = () => {
-    console.log('Flash detected')
+    setHazardDetected(true)
   }
+
+  // Mock plot data by calling plotData() every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      plotData()
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleConnectDevice = async () => {
     await requestPermissions()
