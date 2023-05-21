@@ -1,35 +1,34 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
-import { Svg, Path, Line, G, Text } from 'react-native-svg'
+import { Svg, Path, Line, G } from 'react-native-svg'
 import HazardDetectedContext from '../contexts/HazardDetectedContext'
 
-const scaleY = (value, height) => height - (value / 100) * height
-const scaleX = (value, width) =>
-  (value / windowSize) * (width - horizontalPadding)
-
 const windowSize = 30
-const height = 200
-const { width } = Dimensions.get('window')
 const verticalPadding = 40
 const horizontalPadding = 40
+const height = 200
+const { width } = Dimensions.get('window')
+
+const scaleY = (value, h) => h - (value / 100) * h
+const scaleX = (value, w) => (value / windowSize) * (w - horizontalPadding)
 
 const yValues = [0, 25, 50, 75, 100]
 
 function RealTimeGraph() {
   const [data, setData] = useState(Array(windowSize).fill(0))
+  const pathRef = useRef('')
   const { hazardDetected, setHazardDetected } = useContext(
     HazardDetectedContext
   )
 
-  // Call setHazardDetected(true) every random interval between 1 and 0.5 seconds
+  // Call setHazardDetected(true) every random interval between 0 and 2 seconds
+  // For testing
   useEffect(() => {
     const interval = setInterval(() => {
       setHazardDetected(true)
-    }, Math.random() * 500 + 500)
+    }, Math.random() * 2000)
     return () => clearInterval(interval)
   }, [])
-
-  const pathRef = useRef('')
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -79,8 +78,8 @@ function RealTimeGraph() {
   }, [data])
 
   return (
-    <View style={{ height, width }}>
-      <Svg height={height} width={width}>
+    <View style={styles.chartContainer}>
+      <Svg height={height} width={width - horizontalPadding}>
         <G y={height - verticalPadding}>
           {yValues.map((value, index) => (
             <Line
@@ -107,26 +106,10 @@ function RealTimeGraph() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
   chartContainer: {
     flexDirection: 'row',
-    height: 200,
-  },
-  button: {
-    backgroundColor: '#2344FF',
-    alignItems: 'center',
+    height: height - verticalPadding,
     justifyContent: 'center',
-    padding: 12,
-    borderRadius: 4,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
   },
 })
 
