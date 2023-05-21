@@ -1,17 +1,35 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { LineChart, Grid, YAxis } from 'react-native-svg-charts'
-import * as shape from 'd3-shape'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { View, StyleSheet, Dimensions } from 'react-native'
+import { Svg, Path, Line, G, Text } from 'react-native-svg'
 import HazardDetectedContext from '../contexts/HazardDetectedContext'
 
-const yAxisData = [0, 25, 50, 75, 100]
+const scaleY = (value, height) => height - (value / 100) * height
+const scaleX = (value, width) =>
+  (value / windowSize) * (width - horizontalPadding)
+
 const windowSize = 30
+const height = 200
+const { width } = Dimensions.get('window')
+const verticalPadding = 40
+const horizontalPadding = 40
+
+const yValues = [0, 25, 50, 75, 100]
 
 function RealTimeGraph() {
   const [data, setData] = useState(Array(windowSize).fill(0))
   const { hazardDetected, setHazardDetected } = useContext(
     HazardDetectedContext
   )
+
+  // Call setHazardDetected(true) every random interval between 1 and 0.5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHazardDetected(true)
+    }, Math.random() * 500 + 500)
+    return () => clearInterval(interval)
+  }, [])
+
+  const pathRef = useRef('')
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,30 +59,49 @@ function RealTimeGraph() {
     }
   }, [hazardDetected])
 
+  useEffect(() => {
+    const path = data
+      .map((point, index) => {
+        if (index === 0) {
+          return `M ${scaleX(index, width - horizontalPadding)} ${scaleY(
+            point,
+            height - verticalPadding
+          )}`
+        }
+        return `L ${scaleX(index, width - horizontalPadding)} ${scaleY(
+          point,
+          height - verticalPadding
+        )}`
+      })
+      .join(' ')
+
+    pathRef.current = path
+  }, [data])
+
   return (
-    <View style={styles.container}>
-      <View style={styles.chartContainer}>
-        <YAxis
-          style={{ marginBottom: 10 }}
-          data={yAxisData}
-          contentInset={{ top: 20, bottom: 10 }}
-          svg={{
-            fill: 'grey',
-            fontSize: 10,
-          }}
-          formatLabel={(value) => `${value}%`}
+    <View style={{ height, width }}>
+      <Svg height={height} width={width}>
+        <G y={height - verticalPadding}>
+          {yValues.map((value, index) => (
+            <Line
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              x1="0"
+              x2={width - horizontalPadding}
+              y1={scaleY(value, height - verticalPadding)}
+              y2={scaleY(value, height - verticalPadding)}
+              stroke="grey"
+              strokeWidth="0.5"
+            />
+          ))}
+        </G>
+        <Path
+          d={pathRef.current}
+          fill="none"
+          stroke="#2370FF"
+          strokeWidth="2"
         />
-        <LineChart
-          style={{ flex: 1, marginLeft: 10 }}
-          data={data}
-          curve={shape.curveBasis}
-          svg={{ stroke: '#2370FF', strokeWidth: 2 }}
-          contentInset={{ top: 20, bottom: 20 }}
-          gridMin={100}
-        >
-          <Grid />
-        </LineChart>
-      </View>
+      </Svg>
     </View>
   )
 }
