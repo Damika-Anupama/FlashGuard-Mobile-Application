@@ -4,26 +4,30 @@ import { Button, Card } from 'react-native-paper'
 import RNBluetoothClassic from 'react-native-bluetooth-classic'
 import PropsTypes from 'prop-types'
 
+const requestPermissions = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+    )
+
+    if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+      console.warn('Permissions not granted')
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+}
+
 const useBluetoothDevice = () => {
   const [connected, setConnected] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const requestPermissions = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-      )
-
-      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.warn('Permissions not granted')
-      }
-    } catch (err) {
-      console.warn(err)
-    }
-  }
+  const [subscription, setSubscription] = useState(null)
 
   const connectToDevice = async () => {
     try {
+      if (subscription) {
+        subscription.remove()
+      }
       const paired = await RNBluetoothClassic.getBondedDevices()
       const device = paired[0]
       let connection = await device.isConnected()
@@ -35,9 +39,11 @@ const useBluetoothDevice = () => {
 
       console.log('Connected')
 
-      device.onDataReceived((event) => {
+      const sub = device.onDataReceived((event) => {
         console.log(event.data)
       })
+
+      setSubscription(sub)
     } catch (err) {
       console.warn('Error connecting to device', err)
     }
@@ -52,6 +58,10 @@ const useBluetoothDevice = () => {
       if (connection) {
         console.log('Disconnecting')
         await device.disconnect()
+      }
+
+      if (subscription) {
+        subscription.remove()
       }
 
       console.log('Disconnected')
@@ -75,10 +85,7 @@ const useBluetoothDevice = () => {
     setLoading(false)
   }
 
-  // return { connected, count, loading, handleConnectDevice }
-  useEffect(() => {
-    disconnectFromDevice().then(handleConnectDevice())
-  }, [])
+  return { connected, loading, handleConnectDevice }
 }
 
 function DeviceStatusCard({ connected }) {
@@ -106,11 +113,7 @@ function DeviceStatusCard({ connected }) {
 }
 
 export default function Device() {
-  useBluetoothDevice()
-
-  return null
-  const { connected, count, loading, handleConnectDevice } =
-    useBluetoothDevice()
+  const { connected, loading, handleConnectDevice } = useBluetoothDevice()
 
   let buttonText = 'Connect Device'
   if (loading) {
@@ -126,7 +129,7 @@ export default function Device() {
           <Text className="text-lg text-gray-600">{`Device ${
             connected ? '' : 'not'
           } connected`}</Text>
-          <Text className="text-lg text-gray-600">{`Count: ${count}`}</Text>
+          {/* <Text className="text-lg text-gray-600">{`Count: ${count}`}</Text> */}
 
           <Button
             mode="outlined"
