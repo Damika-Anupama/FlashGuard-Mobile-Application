@@ -23,12 +23,12 @@ function RealTimeGraph() {
 
   // Call setHazardDetected(true) every random interval between 0 and 2 seconds
   // For testing
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHazardDetected(true)
-    }, Math.random() * 2000)
-    return () => clearInterval(interval)
-  }, [])
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setHazardDetected(true)
+  //   }, Math.random() * 500)
+  //   return () => clearInterval(interval)
+  // }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -51,23 +51,33 @@ export default function Device() {
     setHazardDetected(true)
   }
 
-  // Mock plot data by calling plotData() every 2 seconds
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     plotData()
-  //   }, 2000)
-  //   return () => clearInterval(interval)
-  // }, [])
-
   const handleConnectDevice = async () => {
-    await requestPermissions()
-    setLoading(true)
-    setConnected(true)
+    if (connected) {
+      setLoading(true)
+      setConnected(false)
 
-    connect().then(() => {
-      setConnected(true)
+      const paired = await RNBluetoothClassic.getBondedDevices()
+      const device = paired[0]
+
+      const connection = await device.isConnected()
+
+      if (connection) {
+        console.log('Disconnecting')
+        await device.disconnect()
+      }
+
+      console.log('Disconnected')
       setLoading(false)
-    })
+    } else {
+      await requestPermissions()
+      setLoading(true)
+      setConnected(true)
+
+      connect().then(() => {
+        setConnected(true)
+        setLoading(false)
+      })
+    }
   }
 
   let buttonText = 'Connect Device'
