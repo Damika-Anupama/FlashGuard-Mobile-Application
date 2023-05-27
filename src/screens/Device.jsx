@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ScrollView, Text, View, PermissionsAndroid } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import RNBluetoothClassic from 'react-native-bluetooth-classic'
-import PropsTypes from 'prop-types'
 
 const requestPermissions = async () => {
   try {
@@ -88,7 +87,7 @@ const useBluetoothDevice = (setData) => {
   return { connected, loading, handleConnectDevice }
 }
 
-function DeviceStatusCard({ connected }) {
+function DeviceStatusCard() {
   return (
     <Card className="m-4 bg-white" mode="elevated">
       <Card.Content>
@@ -131,7 +130,6 @@ export default function Device() {
           <Text className="text-lg text-gray-600">{`Device ${
             connected ? '' : 'not'
           } connected`}</Text>
-          <Text className="text-lg text-gray-600">{`Data: ${data}`}</Text>
 
           <Button
             mode="outlined"
@@ -146,8 +144,4 @@ export default function Device() {
       {connected && <DeviceStatusCard connected={connected} />}
     </ScrollView>
   )
-}
-
-DeviceStatusCard.propTypes = {
-  connected: PropsTypes.bool.isRequired,
 }
