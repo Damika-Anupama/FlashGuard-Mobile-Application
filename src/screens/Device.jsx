@@ -18,7 +18,7 @@ const requestPermissions = async () => {
   }
 }
 
-const useBluetoothDevice = () => {
+const useBluetoothDevice = (setData) => {
   const [connected, setConnected] = useState(false)
   const [loading, setLoading] = useState(false)
   const [subscription, setSubscription] = useState(null)
@@ -40,7 +40,7 @@ const useBluetoothDevice = () => {
       console.log('Connected')
 
       const sub = device.onDataReceived((event) => {
-        console.log(event.data)
+        setData(event.data)
       })
 
       setSubscription(sub)
@@ -113,7 +113,9 @@ function DeviceStatusCard({ connected }) {
 }
 
 export default function Device() {
-  const { connected, loading, handleConnectDevice } = useBluetoothDevice()
+  const [data, setData] = useState(null)
+  const { connected, loading, handleConnectDevice } =
+    useBluetoothDevice(setData)
 
   let buttonText = 'Connect Device'
   if (loading) {
@@ -129,7 +131,7 @@ export default function Device() {
           <Text className="text-lg text-gray-600">{`Device ${
             connected ? '' : 'not'
           } connected`}</Text>
-          {/* <Text className="text-lg text-gray-600">{`Count: ${count}`}</Text> */}
+          <Text className="text-lg text-gray-600">{`Data: ${data}`}</Text>
 
           <Button
             mode="outlined"
