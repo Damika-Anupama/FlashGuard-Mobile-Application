@@ -107,7 +107,7 @@ function RealTimeGraph() {
           return newData
         })
       }
-    }, 30)
+    }, 10)
 
     debouncedSetGraphData()
 
@@ -130,7 +130,7 @@ function RealTimeGraph() {
           <GraphPath graphData={graphData} />
         </Svg>
       </View>
-      <FlashData lumFreq={lumFreq} />
+      <FlashData lumFreq={graphData[graphData.length - 2]} />
     </View>
   )
 }
