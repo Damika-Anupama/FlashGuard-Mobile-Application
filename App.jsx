@@ -11,7 +11,61 @@ import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
 import ConnectionContext from './src/contexts/ConnectionContext'
 import IncidentsContext from './src/contexts/IncidentsContext'
-import HazardDetectedContext from './src/contexts/HazardDetectedContext'
+
+function App() {
+  const [connected, setConnected] = useState(false)
+  const [incidents, setIncidents] = useState([])
+
+  const connectedValue = useMemo(
+    () => ({
+      connected,
+      setConnected,
+    }),
+    [connected]
+  )
+
+  const incidentsValue = useMemo(
+    () => ({ incidents, setIncidents, saveIncidents }),
+    [incidents, setIncidents, saveIncidents]
+  )
+
+  useEffect(() => {
+    // Load incidents on mount
+    loadIncidents(setIncidents)
+  }, [])
+
+  return (
+    <PaperProvider theme={theme}>
+      <ConnectionContext.Provider value={connectedValue}>
+        <IncidentsContext.Provider value={incidentsValue}>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: (props) => tabBarIcon(props, route),
+                tabBarActiveTintColor: 'tomato',
+                tabBarInactiveTintColor: 'gray',
+              })}
+            >
+              <Tab.Screen
+                name="HomeStack"
+                component={HomeStack}
+                options={{ title: 'Home', headerShown: false }}
+              />
+              <Tab.Screen name="Dashboard" component={Dashboard} />
+              <Tab.Screen name="Device" component={Device} />
+              <Tab.Screen
+                name="ProfileStack"
+                component={ProfileStack}
+                options={{ title: 'Profile', headerShown: false }}
+              />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </IncidentsContext.Provider>
+      </ConnectionContext.Provider>
+      <StatusBar style="dark" />
+    </PaperProvider>
+  )
+}
 
 const Tab = createBottomTabNavigator()
 
@@ -59,72 +113,6 @@ const tabBarIcon = ({ focused, color, size }, route) => {
   }
 
   return <Ionicons name={iconName} size={size} color={color} />
-}
-
-function App() {
-  const [connected, setConnected] = useState(false)
-  const connectedValue = useMemo(
-    () => ({
-      connected,
-      setConnected,
-    }),
-    [connected]
-  )
-
-  const [incidents, setIncidents] = useState([])
-  const [hazardDetected, setHazardDetected] = useState(false)
-
-  const hazardDetectedValue = useMemo(
-    () => ({
-      hazardDetected,
-      setHazardDetected,
-    }),
-    [hazardDetected]
-  )
-
-  useEffect(() => {
-    // Load incidents on mount
-    loadIncidents(setIncidents)
-  }, [])
-
-  const incidentsValue = useMemo(
-    () => ({ incidents, setIncidents, saveIncidents }),
-    [incidents, setIncidents, saveIncidents]
-  )
-
-  return (
-    <PaperProvider theme={theme}>
-      <ConnectionContext.Provider value={connectedValue}>
-        <IncidentsContext.Provider value={incidentsValue}>
-          <HazardDetectedContext.Provider value={hazardDetectedValue}>
-            <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={({ route }) => ({
-                  tabBarIcon: (props) => tabBarIcon(props, route),
-                  tabBarActiveTintColor: 'tomato',
-                  tabBarInactiveTintColor: 'gray',
-                })}
-              >
-                <Tab.Screen
-                  name="HomeStack"
-                  component={HomeStack}
-                  options={{ title: 'Home', headerShown: false }}
-                />
-                <Tab.Screen name="Dashboard" component={Dashboard} />
-                <Tab.Screen name="Device" component={Device} />
-                <Tab.Screen
-                  name="ProfileStack"
-                  component={ProfileStack}
-                  options={{ title: 'Profile', headerShown: false }}
-                />
-              </Tab.Navigator>
-            </NavigationContainer>
-          </HazardDetectedContext.Provider>
-        </IncidentsContext.Provider>
-      </ConnectionContext.Provider>
-      <StatusBar style="dark" />
-    </PaperProvider>
-  )
 }
 
 export default App

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ScrollView, Text, View, PermissionsAndroid } from 'react-native'
 import { Button, Card } from 'react-native-paper'
 import RNBluetoothClassic from 'react-native-bluetooth-classic'
+import useHazardData from '../hooks/hazardData'
 
 const requestPermissions = async () => {
   try {
@@ -112,7 +113,7 @@ function DeviceStatusCard() {
 }
 
 export default function Device() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useHazardData()
   const { connected, loading, handleConnectDevice } =
     useBluetoothDevice(setData)
 
