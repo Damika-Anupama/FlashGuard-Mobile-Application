@@ -23,6 +23,27 @@ const theme = {
     primary: '#1936DA',
   },
 }
+// Save incidents to storage
+const saveIncidents = async (incident) => {
+  try {
+    await AsyncStorage.setItem('incidents', JSON.stringify(incident))
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// Load incidents from storage
+const loadIncidents = async (setIncidents) => {
+  try {
+    const incidentsString = await AsyncStorage.getItem('incidents')
+
+    if (incidentsString !== null) {
+      setIncidents(JSON.parse(incidentsString))
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 const tabBarIcon = ({ focused, color, size }, route) => {
   let iconName
@@ -61,31 +82,9 @@ function App() {
     [hazardDetected]
   )
 
-  // Save incidents to storage
-  const saveIncidents = async (incident) => {
-    try {
-      await AsyncStorage.setItem('incidents', JSON.stringify(incident))
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  // Load incidents from storage
-  const loadIncidents = async () => {
-    try {
-      const incidentsString = await AsyncStorage.getItem('incidents')
-
-      if (incidentsString !== null) {
-        setIncidents(JSON.parse(incidentsString))
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   useEffect(() => {
     // Load incidents on mount
-    loadIncidents()
+    loadIncidents(setIncidents)
   }, [])
 
   const incidentsValue = useMemo(
