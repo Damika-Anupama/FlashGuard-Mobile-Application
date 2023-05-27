@@ -16,7 +16,7 @@ const yValues = [0, 25, 50, 75, 100]
 
 function RealTimeGraph() {
   const [graphData, setGraphData] = useState(Array(windowSize).fill(0))
-  const [flashData, setFlashData] = useHazardData()
+  const [flashData] = useHazardData()
   const pathRef = useRef('')
 
   useEffect(() => {
