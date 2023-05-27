@@ -81,7 +81,7 @@ function RealTimeGraph() {
   const [graphData, setGraphData] = useState(Array(windowSize).fill(0))
   const [flashData] = useHazardData()
   const lumFreq = Number(flashData?.split(',')[0]) || 0
-  const redFreq = Number(flashData?.split(',')[1]) || 0
+  // const redFreq = Number(flashData?.split(',')[1]) || 0
 
   // Add new data point every 200ms
   useEffect(() => {
@@ -130,7 +130,7 @@ function RealTimeGraph() {
           <GraphPath graphData={graphData} />
         </Svg>
       </View>
-      <FlashData lumFreq={lumFreq} redFreq={redFreq} />
+      <FlashData lumFreq={lumFreq} />
     </View>
   )
 }
