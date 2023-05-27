@@ -3,6 +3,8 @@ import { View, Dimensions, Text } from 'react-native'
 import { Svg, Path, Line } from 'react-native-svg'
 import PropTypes from 'prop-types'
 import useHazardData from '../hooks/hazardData'
+import FlashData from './FlashData'
+import { debounce } from 'lodash'
 
 const windowSize = 30
 const verticalPadding = 40
@@ -56,15 +58,21 @@ function YAxis() {
 }
 
 function GraphPath({ graphData }) {
-  const pathData = graphData
-    .map(
-      (point, index) =>
-        `${index === 0 ? 'M' : 'L'} ${scaleX(
-          index,
-          width - horizontalPadding
-        )} ${scaleY(point, height - verticalPadding)}`
-    )
-    .join(' ')
+  const [pathData, setPathData] = useState('')
+
+  useEffect(() => {
+    const newPathData = graphData
+      .map(
+        (point, index) =>
+          `${index === 0 ? 'M' : 'L'} ${scaleX(
+            index,
+            width - horizontalPadding
+          )} ${scaleY(point, height - verticalPadding)}`
+      )
+      .join(' ')
+
+    setPathData(newPathData)
+  }, [graphData])
 
   return <Path d={pathData} fill="none" stroke="#5482D6" strokeWidth="2" />
 }
@@ -72,8 +80,10 @@ function GraphPath({ graphData }) {
 function RealTimeGraph() {
   const [graphData, setGraphData] = useState(Array(windowSize).fill(0))
   const [flashData] = useHazardData()
+  const lumFreq = Number(flashData?.split(',')[0]) || 0
+  const redFreq = Number(flashData?.split(',')[1]) || 0
 
-  // Add new data point every 100ms
+  // Add new data point every 200ms
   useEffect(() => {
     const interval = setInterval(() => {
       setGraphData((prevData) => {
@@ -83,33 +93,44 @@ function RealTimeGraph() {
         }
         return newData
       })
-    }, 100)
+    }, 200)
     return () => clearInterval(interval)
   }, [])
 
   // Add flash data to the graph when it's available
   useEffect(() => {
-    if (flashData) {
-      const [firstNumber] = flashData.split(',')
-      setGraphData((prevData) => {
-        const newData = [...prevData]
-        newData[newData.length - 1] = Number(firstNumber) || 0
-        return newData
-      })
+    const debouncedSetGraphData = debounce(() => {
+      if (flashData) {
+        setGraphData((prevData) => {
+          const newData = [...prevData]
+          newData[newData.length - 1] = Number(lumFreq) || 0
+          return newData
+        })
+      }
+    }, 30)
+
+    debouncedSetGraphData()
+
+    // clean up on component unmount
+    return () => {
+      debouncedSetGraphData.cancel()
     }
   }, [flashData])
 
   return (
-    <View style={{ width, height, marginTop: 20 }}>
-      <YAxisLabels />
-      <Svg
-        height={height}
-        width={width - horizontalPadding}
-        className="absolute top-0 right-0"
-      >
-        <YAxis />
-        <GraphPath graphData={graphData} />
-      </Svg>
+    <View>
+      <View style={{ width, height, marginTop: 20 }}>
+        <YAxisLabels />
+        <Svg
+          height={height}
+          width={width - horizontalPadding}
+          className="absolute top-0 right-0"
+        >
+          <YAxis />
+          <GraphPath graphData={graphData} />
+        </Svg>
+      </View>
+      <FlashData lumFreq={lumFreq} redFreq={redFreq} />
     </View>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
 import { Card } from 'react-native-paper'
 import RealTimeGraph from './RealTimeGraph'
 
@@ -12,10 +12,6 @@ export default function Graph() {
           The graph below displays the detected flashes in real-time
         </Text>
         <RealTimeGraph />
-        <View className="flex flex-col mt-4 space-y-2">
-          <Text className="text-gray-700">Luminance frequency:</Text>
-          <Text className="text-gray-700">Red frequency:</Text>
-        </View>
       </Card.Content>
     </Card>
   )
