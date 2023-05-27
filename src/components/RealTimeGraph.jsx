@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
-import { Svg, Path, Line, G } from 'react-native-svg'
+import React, { useState, useEffect } from 'react'
+import { View, Dimensions } from 'react-native'
+import { Svg, Path } from 'react-native-svg'
+import PropTypes from 'prop-types'
 import useHazardData from '../hooks/hazardData'
 
 const windowSize = 30
@@ -12,17 +13,29 @@ const { width } = Dimensions.get('window')
 const scaleY = (value, h) => h - (value / 100) * h
 const scaleX = (value, w) => (value / windowSize) * (w - horizontalPadding)
 
-const yValues = [0, 25, 50, 75, 100]
+function GraphPath({ graphData }) {
+  const pathData = graphData
+    .map(
+      (point, index) =>
+        `${index === 0 ? 'M' : 'L'} ${scaleX(
+          index,
+          width - horizontalPadding
+        )} ${scaleY(point, height - verticalPadding)}`
+    )
+    .join(' ')
+
+  return <Path d={pathData} fill="none" stroke="#2370FF" strokeWidth="2" />
+}
 
 function RealTimeGraph() {
   const [graphData, setGraphData] = useState(Array(windowSize).fill(0))
   const [flashData] = useHazardData()
-  const pathRef = useRef('')
 
+  // Add new data point every 100ms
   useEffect(() => {
     const interval = setInterval(() => {
       setGraphData((prevData) => {
-        const newData = prevData.concat(0)
+        const newData = [...prevData, 0]
         if (newData.length > windowSize) {
           newData.shift()
         }
@@ -32,12 +45,10 @@ function RealTimeGraph() {
     return () => clearInterval(interval)
   }, [])
 
+  // Add flash data to the graph when it's available
   useEffect(() => {
     if (flashData) {
       setGraphData((prevData) => {
-        if (prevData.length <= 1) {
-          return prevData
-        }
         const newData = [...prevData]
         newData[newData.length - 1] = 100
         return newData
@@ -45,59 +56,17 @@ function RealTimeGraph() {
     }
   }, [flashData])
 
-  useEffect(() => {
-    const path = graphData
-      .map((point, index) => {
-        if (index === 0) {
-          return `M ${scaleX(index, width - horizontalPadding)} ${scaleY(
-            point,
-            height - verticalPadding
-          )}`
-        }
-        return `L ${scaleX(index, width - horizontalPadding)} ${scaleY(
-          point,
-          height - verticalPadding
-        )}`
-      })
-      .join(' ')
-
-    pathRef.current = path
-  }, [graphData])
-
   return (
-    <View style={styles.chartContainer}>
+    <View>
       <Svg height={height} width={width - horizontalPadding}>
-        <G y={height - verticalPadding}>
-          {yValues.map((value, index) => (
-            <Line
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              x1="0"
-              x2={width - horizontalPadding}
-              y1={scaleY(value, height - verticalPadding)}
-              y2={scaleY(value, height - verticalPadding)}
-              stroke="grey"
-              strokeWidth="0.5"
-            />
-          ))}
-        </G>
-        <Path
-          d={pathRef.current}
-          fill="none"
-          stroke="#2370FF"
-          strokeWidth="2"
-        />
+        <GraphPath graphData={graphData} />
       </Svg>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  chartContainer: {
-    flexDirection: 'row',
-    height: height - verticalPadding,
-    justifyContent: 'center',
-  },
-})
+GraphPath.propTypes = {
+  graphData: PropTypes.arrayOf(PropTypes.number).isRequired,
+}
 
 export default RealTimeGraph
