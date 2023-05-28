@@ -12,7 +12,7 @@ const horizontalPadding = 40
 const height = 200
 const width = Dimensions.get('window').width - 50
 
-const scaleY = (value, h) => h - (value / 50) * h
+const scaleY = (value, h) => h - (value / 5) * h
 const scaleX = (value, w) =>
   (value / (windowSize - 2)) * (w - horizontalPadding)
 
@@ -21,7 +21,7 @@ function YAxisLabels() {
   const numberOfLabels = 6
   const labels = Array.from(
     { length: numberOfLabels },
-    (_, i) => ((numberOfLabels - i - 1) / (numberOfLabels - 1)) * 50
+    (_, i) => ((numberOfLabels - i - 1) / (numberOfLabels - 1)) * 5
   )
 
   return (
