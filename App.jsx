@@ -12,35 +12,10 @@ import ProfileStack from './src/screens/ProfileStack'
 import ConnectionContext from './src/contexts/ConnectionContext'
 import IncidentsContext from './src/contexts/IncidentsContext'
 
-const Tab = createBottomTabNavigator()
-
-// Theme
-const theme = {
-  ...MD3LightTheme,
-  colors: {
-    ...MD3LightTheme.colors,
-    primary: '#1936DA',
-  },
-}
-
-const tabBarIcon = ({ focused, color, size }, route) => {
-  let iconName
-
-  if (route.name === 'HomeStack') {
-    iconName = focused ? 'home' : 'home-outline'
-  } else if (route.name === 'Dashboard') {
-    iconName = focused ? 'bar-chart' : 'bar-chart-outline'
-  } else if (route.name === 'Device') {
-    iconName = focused ? 'glasses' : 'glasses-outline'
-  } else if (route.name === 'ProfileStack') {
-    iconName = focused ? 'person' : 'person-outline'
-  }
-
-  return <Ionicons name={iconName} size={size} color={color} />
-}
-
 function App() {
   const [connected, setConnected] = useState(false)
+  const [incidents, setIncidents] = useState([])
+
   const connectedValue = useMemo(
     () => ({
       connected,
@@ -49,39 +24,15 @@ function App() {
     [connected]
   )
 
-  const [incidents, setIncidents] = useState([])
-
-  // Save incidents to storage
-  const saveIncidents = async (incident) => {
-    try {
-      await AsyncStorage.setItem('incidents', JSON.stringify(incident))
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  // Load incidents from storage
-  const loadIncidents = async () => {
-    try {
-      const incidentsString = await AsyncStorage.getItem('incidents')
-
-      if (incidentsString !== null) {
-        setIncidents(JSON.parse(incidentsString))
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  useEffect(() => {
-    // Load incidents on mount
-    loadIncidents()
-  }, [])
-
   const incidentsValue = useMemo(
     () => ({ incidents, setIncidents, saveIncidents }),
     [incidents, setIncidents, saveIncidents]
   )
+
+  useEffect(() => {
+    // Load incidents on mount
+    loadIncidents(setIncidents)
+  }, [])
 
   return (
     <PaperProvider theme={theme}>
@@ -114,6 +65,54 @@ function App() {
       <StatusBar style="dark" />
     </PaperProvider>
   )
+}
+
+const Tab = createBottomTabNavigator()
+
+// Theme
+const theme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: '#1936DA',
+  },
+}
+// Save incidents to storage
+const saveIncidents = async (incident) => {
+  try {
+    await AsyncStorage.setItem('incidents', JSON.stringify(incident))
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// Load incidents from storage
+const loadIncidents = async (setIncidents) => {
+  try {
+    const incidentsString = await AsyncStorage.getItem('incidents')
+
+    if (incidentsString !== null) {
+      setIncidents(JSON.parse(incidentsString))
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+const tabBarIcon = ({ focused, color, size }, route) => {
+  let iconName
+
+  if (route.name === 'HomeStack') {
+    iconName = focused ? 'home' : 'home-outline'
+  } else if (route.name === 'Dashboard') {
+    iconName = focused ? 'bar-chart' : 'bar-chart-outline'
+  } else if (route.name === 'Device') {
+    iconName = focused ? 'glasses' : 'glasses-outline'
+  } else if (route.name === 'ProfileStack') {
+    iconName = focused ? 'person' : 'person-outline'
+  }
+
+  return <Ionicons name={iconName} size={size} color={color} />
 }
 
 export default App
