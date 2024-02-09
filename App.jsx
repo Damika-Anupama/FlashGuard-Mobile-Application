@@ -10,7 +10,7 @@ import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
 import IncidentsContext from './src/contexts/IncidentsContext'
 
-const DATA_URL = 'http://143.198.238.66/'
+const DATA_URL = 'https://flashguard.mmzdev.com/'
 
 function App() {
   const [incidents, setIncidents] = useState([])
