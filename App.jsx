@@ -4,52 +4,39 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { StatusBar } from 'expo-status-bar'
-import { CosmosClient } from '@azure/cosmos'
 import HomeStack from './src/screens/HomeStack'
 import Dashboard from './src/screens/Dashboard'
 import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
 import IncidentsContext from './src/contexts/IncidentsContext'
 
-const cosmosDbEndpoint = process.env.EXPO_PUBLIC_AZURE_COSMOS_URL
-const masterKey = process.env.EXPO_PUBLIC_AZURE_COSMOS_MASTER_KEY
-const databaseId = process.env.EXPO_PUBLIC_AZURE_COSMOS_DBNAME
-const containerId = 'deviceContainer'
-
-const client = new CosmosClient({ endpoint: cosmosDbEndpoint, key: masterKey })
+const DATA_URL = 'http://143.198.238.66/'
 
 function App() {
   const [incidents, setIncidents] = useState([])
 
+  const fetchIncidents = async () => {
+    try {
+      const data = await fetch(DATA_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const jsonData = await data.json()
+      setIncidents(jsonData)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const incidentsValue = useMemo(
-    () => ({ incidents, setIncidents }),
-    [incidents, setIncidents]
+    () => ({ incidents, setIncidents, fetchIncidents }),
+    [incidents, setIncidents, fetchIncidents]
   )
 
   useEffect(() => {
-    // Load incidents from Azure Cosmos DB
-    let load = true
-
-    const fetchIncidents = async () => {
-      if (load) {
-        const container = client.database(databaseId).container(containerId)
-        const querySpec = {
-          query: 'SELECT * from c OFFSET 0 LIMIT 10',
-        }
-        const { resources: items } = await container.items
-          .query(querySpec)
-          .fetchAll()
-        console.log('items', items)
-        // setIncidents(items)
-      }
-    }
-
     fetchIncidents()
-
-    return () => {
-      // Cleanup
-      load = false
-    }
   }, [])
 
   return (

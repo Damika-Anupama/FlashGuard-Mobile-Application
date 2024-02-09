@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, Dimensions, Text } from 'react-native'
 import { Svg, Path, Line } from 'react-native-svg'
 import PropTypes from 'prop-types'
-import useHazardData from '../hooks/hazardData'
 import FlashData from './FlashData'
-import { debounce } from 'lodash'
+import IncidentsContext from '../contexts/IncidentsContext'
 
-const windowSize = 30
+const windowSize = 60
 const verticalPadding = 40
 const horizontalPadding = 40
 const height = 200
@@ -35,8 +34,8 @@ function YAxisLabels() {
         alignItems: 'flex-end',
       }}
     >
-      {labels.map((label, i) => (
-        <View key={i}>
+      {labels.map((label) => (
+        <View key={label}>
           <Text className="text-xs text-gray-500">{label}</Text>
         </View>
       ))}
@@ -79,43 +78,42 @@ function GraphPath({ graphData }) {
 
 function RealTimeGraph() {
   const [graphData, setGraphData] = useState(Array(windowSize).fill(0))
-  const [flashData] = useHazardData()
-  const lumFreq = Number(flashData?.split(',')[0]) || 0
-  // const redFreq = Number(flashData?.split(',')[1]) || 0
+  const { incidents, fetchIncidents } = useContext(IncidentsContext)
 
-  // Add new data point every 200ms
+  // incidents: [{"ts":1707473738,"luminous_freq":0.0009787055925607178,"red_freq":0}, ...]
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setGraphData((prevData) => {
-        const newData = [...prevData, 0]
-        if (newData.length > windowSize) {
-          newData.shift()
+      setGraphData(() => {
+        const currentTime = Math.floor(Date.now() / 1000)
+        const oneMinuteBefore = Math.floor(Date.now() / 1000) - 60 // 1 min ago in Unix timestamp
+
+        // Filter incidents to the last 5 minutes
+        const recentIncidents = incidents.filter(
+          ({ ts }) => ts >= oneMinuteBefore
+        )
+
+        // Create a map of incidents for quick lookup
+        const incidentsMap = recentIncidents.reduce((acc, current) => {
+          acc[current.ts] = current.luminous_freq
+          return acc
+        }, {})
+
+        // Generate graph data for the last 60 seconds, filling in zeros where there are no incidents
+        const newGraphData = []
+        for (let i = 0; i < 60; i += 1) {
+          const ts = currentTime - 60 + i
+          newGraphData.push(incidentsMap[ts] || 0)
         }
-        return newData
+
+        fetchIncidents()
+
+        return newGraphData
       })
-    }, 200)
+    }, 1000)
+
     return () => clearInterval(interval)
-  }, [])
-
-  // Add flash data to the graph when it's available
-  useEffect(() => {
-    const debouncedSetGraphData = debounce(() => {
-      if (flashData) {
-        setGraphData((prevData) => {
-          const newData = [...prevData]
-          newData[newData.length - 1] = Number(lumFreq) || 0
-          return newData
-        })
-      }
-    }, 10)
-
-    debouncedSetGraphData()
-
-    // clean up on component unmount
-    return () => {
-      debouncedSetGraphData.cancel()
-    }
-  }, [flashData])
+  }, [incidents])
 
   return (
     <View>
@@ -130,7 +128,7 @@ function RealTimeGraph() {
           <GraphPath graphData={graphData} />
         </Svg>
       </View>
-      <FlashData lumFreq={graphData[graphData.length - 2]} />
+      <FlashData lumFreq={Math.max(...graphData.slice(-4))} />
     </View>
   )
 }

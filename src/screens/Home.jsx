@@ -32,7 +32,7 @@ const getNumberOfIncidentsForToday = (incidents) => {
 }
 
 export default function Home() {
-  const { incidents } = useContext(IncidentsContext)
+  const { incidents, fetchIncidents } = useContext(IncidentsContext)
 
   const navigation = useNavigation()
 
@@ -54,13 +54,18 @@ export default function Home() {
       </Card>
       <Card className="m-4 bg-white" mode="elevated">
         <Card.Content>
-          <Text className="mb-2 text-xl font-bold">Stats for Today</Text>
+          <View className="flex flex-row justify-between">
+            <Text className="mb-2 text-xl font-bold">Stats for Today</Text>
+            <Button mode="text" onPress={fetchIncidents}>
+              Refresh
+            </Button>
+          </View>
           <Text className="mb-5 text-gray-700">
             Your daily stats are displayed below.
           </Text>
           <View className="flex flex-row justify-between">
             <Text className="text-lg">Hazards blocked </Text>
-            <Text className="text-lg">133</Text>
+            <Text className="text-lg">{incidents.length}</Text>
           </View>
           <View className="flex flex-row justify-between">
             <Text className="text-lg">Incidents </Text>
