@@ -8,19 +8,19 @@ import IncidentsContext from '../contexts/IncidentsContext'
 const windowSize = 60
 const verticalPadding = 40
 const horizontalPadding = 40
-const height = 200
+const height = 300
 const width = Dimensions.get('window').width - 50
 
-const scaleY = (value, h) => h - (value / 5) * h
+const scaleY = (value, h) => h - (value / 10) * h
 const scaleX = (value, w) =>
   (value / (windowSize - 2)) * (w - horizontalPadding)
 
 function YAxisLabels() {
   const yAxisHeight = height - verticalPadding
-  const numberOfLabels = 6
+  const numberOfLabels = 11
   const labels = Array.from(
     { length: numberOfLabels },
-    (_, i) => ((numberOfLabels - i - 1) / (numberOfLabels - 1)) * 5
+    (_, i) => ((numberOfLabels - i - 1) / (numberOfLabels - 1)) * 10
   )
 
   return (
