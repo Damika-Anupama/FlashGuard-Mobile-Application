@@ -3,65 +3,81 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StatusBar } from 'expo-status-bar'
+import { CosmosClient } from '@azure/cosmos'
 import HomeStack from './src/screens/HomeStack'
 import Dashboard from './src/screens/Dashboard'
 import Device from './src/screens/Device'
 import ProfileStack from './src/screens/ProfileStack'
-import ConnectionContext from './src/contexts/ConnectionContext'
 import IncidentsContext from './src/contexts/IncidentsContext'
 
+const cosmosDbEndpoint = process.env.EXPO_PUBLIC_AZURE_COSMOS_URL
+const masterKey = process.env.EXPO_PUBLIC_AZURE_COSMOS_MASTER_KEY
+const databaseId = process.env.EXPO_PUBLIC_AZURE_COSMOS_DBNAME
+const containerId = 'deviceContainer'
+
+const client = new CosmosClient({ endpoint: cosmosDbEndpoint, key: masterKey })
+
 function App() {
-  const [connected, setConnected] = useState(false)
   const [incidents, setIncidents] = useState([])
 
-  const connectedValue = useMemo(
-    () => ({
-      connected,
-      setConnected,
-    }),
-    [connected]
-  )
-
   const incidentsValue = useMemo(
-    () => ({ incidents, setIncidents, saveIncidents }),
-    [incidents, setIncidents, saveIncidents]
+    () => ({ incidents, setIncidents }),
+    [incidents, setIncidents]
   )
 
   useEffect(() => {
-    // Load incidents on mount
-    loadIncidents(setIncidents)
+    // Load incidents from Azure Cosmos DB
+    let load = true
+
+    const fetchIncidents = async () => {
+      if (load) {
+        const container = client.database(databaseId).container(containerId)
+        const querySpec = {
+          query: 'SELECT * from c OFFSET 0 LIMIT 10',
+        }
+        const { resources: items } = await container.items
+          .query(querySpec)
+          .fetchAll()
+        console.log('items', items)
+        // setIncidents(items)
+      }
+    }
+
+    fetchIncidents()
+
+    return () => {
+      // Cleanup
+      load = false
+    }
   }, [])
 
   return (
     <PaperProvider theme={theme}>
-      <ConnectionContext.Provider value={connectedValue}>
-        <IncidentsContext.Provider value={incidentsValue}>
-          <NavigationContainer>
-            <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: (props) => tabBarIcon(props, route),
-                tabBarActiveTintColor: 'tomato',
-                tabBarInactiveTintColor: 'gray',
-              })}
-            >
-              <Tab.Screen
-                name="HomeStack"
-                component={HomeStack}
-                options={{ title: 'Home', headerShown: false }}
-              />
-              <Tab.Screen name="Dashboard" component={Dashboard} />
-              <Tab.Screen name="Device" component={Device} />
-              <Tab.Screen
-                name="ProfileStack"
-                component={ProfileStack}
-                options={{ title: 'Profile', headerShown: false }}
-              />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </IncidentsContext.Provider>
-      </ConnectionContext.Provider>
+      <IncidentsContext.Provider value={incidentsValue}>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: (props) => tabBarIcon(props, route),
+              tabBarActiveTintColor: 'tomato',
+              tabBarInactiveTintColor: 'gray',
+            })}
+          >
+            <Tab.Screen
+              name="HomeStack"
+              component={HomeStack}
+              options={{ title: 'Home', headerShown: false }}
+            />
+            <Tab.Screen name="Dashboard" component={Dashboard} />
+            <Tab.Screen name="Device" component={Device} />
+            <Tab.Screen
+              name="ProfileStack"
+              component={ProfileStack}
+              options={{ title: 'Profile', headerShown: false }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </IncidentsContext.Provider>
       <StatusBar style="dark" />
     </PaperProvider>
   )
@@ -76,27 +92,6 @@ const theme = {
     ...MD3LightTheme.colors,
     primary: '#1936DA',
   },
-}
-// Save incidents to storage
-const saveIncidents = async (incident) => {
-  try {
-    await AsyncStorage.setItem('incidents', JSON.stringify(incident))
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-// Load incidents from storage
-const loadIncidents = async (setIncidents) => {
-  try {
-    const incidentsString = await AsyncStorage.getItem('incidents')
-
-    if (incidentsString !== null) {
-      setIncidents(JSON.parse(incidentsString))
-    }
-  } catch (e) {
-    console.log(e)
-  }
 }
 
 const tabBarIcon = ({ focused, color, size }, route) => {
