@@ -1,0 +1,458 @@
+repo_name: Damika-Anupama/FlashGuard-Mobile-Application
+report_id: 29adbf46150d11ad4fb8b3c28027ab28
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-29T20:09:14+00:00'
+requested_by: Damika-Anupama
+provider: github
+branch: main
+detected_tools_count: 34
+tools:
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application
+  detection_source: Repo Metadata
+- name: D3.js
+  description: A JavaScript visualization library for HTML and SVG
+  website_url: http://d3js.org/
+  license: ISC
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Charting Libraries
+  image_url: https://img.stackshare.io/service/1491/HgKolWB5_400x400.jpg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: Damika
+  last_updated_on: 2022-12-31 19:28:37.000000000 Z
+- name: Expo
+  description: Build one project that runs natively on all your users' devices
+  website_url: https://expo.dev/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Cross-Platform Mobile Development
+  image_url: https://img.stackshare.io/service/5795/default_683a3de22a6983c41f27b04348f4c7380c5e3c21.jpg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: Damika
+  last_updated_on: 2022-12-31 19:28:37.000000000 Z
+- name: React
+  description: A JavaScript library for building user interfaces
+  website_url: https://reactjs.org/
+  version: 18.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript UI Libraries
+  image_url: https://img.stackshare.io/service/1020/OYIaJ1KK.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: App.jsx
+  last_updated_by: mmz-001
+  last_updated_on: 2023-05-27 03:11:08.000000000 Z
+- name: React Native
+  description: A framework for building native apps with React
+  website_url: http://facebook.github.io/
+  version: 0.71.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Cross-Platform Mobile Development
+  image_url: https://img.stackshare.io/service/2699/KoK6gHzp.jpg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-28 11:48:49.000000000 Z
+- name: Tailwind CSS
+  description: A utility-first CSS framework for rapid UI development
+  website_url: https://tailwindcss.com
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Front-End Frameworks
+  image_url: https://img.stackshare.io/service/8158/default_660b7c41c3ba489cb581eec89c04655404258c19.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-09 05:30:09.000000000 Z
+- name: Babel
+  description: Use next generation JavaScript, today.
+  website_url: http://babeljs.io/
+  version: 7.21.8
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: JavaScript Compilers
+  image_url: https://img.stackshare.io/service/2739/-1wfGjNw.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: babel.config.js
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-09 05:30:09.000000000 Z
+- name: ESLint
+  description: The fully pluggable JavaScript code quality tool
+  website_url: http://eslint.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: Damika
+  last_updated_on: 2022-12-31 19:28:37.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application
+  detection_source: Repo Metadata
+- name: Prettier
+  description: Prettier is an opinionated code formatter.
+  website_url: https://prettier.io/
+  version: 2.8.8
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/7035/default_66f265943abed56bcdbfca1c866a4261b1fbb063.jpg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-09 05:30:09.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: Damika
+  last_updated_on: 2022-12-31 19:28:37.000000000 Z
+- name: Lodash
+  description: A JavaScript utility library
+  website_url: https://lodash.com
+  version: 4.17.21
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/service/2438/lodash.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-05-27 05:26:53.000000000 Z
+- name: Moment.js
+  description: A JavaScript date library for parsing, validating, manipulating, and
+    formatting dates
+  website_url: http://momentjs.com/
+  version: 2.29.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/service/3643/Xrtdc94q_400x400.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-29 01:55:47.000000000 Z
+- name: React Native Paper
+  description: Material Design for React Native (Android &amp; iOS)
+  website_url: https://callstack.github.io/react-native-paper/
+  version: 5.8.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Mobile
+  sub_category: Mobile UI Frameworks
+  image_url: https://img.stackshare.io/service/8731/17571969.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-28 11:48:49.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application
+  detection_source: Repo Metadata
+- name: date-fns
+  description: Modern JavaScript date utility library
+  website_url: https://date-fns.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/service/10865/default_5551fb8853689f607a2bc0d5a09355d5a3d52bf0.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-16 11:29:50.000000000 Z
+- name: husky
+  website_url: https://github.com/typicode/husky
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/9527/5502029.jpeg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-09 03:53:03.000000000 Z
+- name: lint-staged
+  website_url: https://github.com/okonet/lint-staged
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/10577/11071.jpeg
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-24 16:08:23.000000000 Z
+- name: "@babel/core"
+  description: Babel compiler core
+  package_url: https://www.npmjs.com/@babel/core
+  version: 7.21.8
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15810/default_004658cda9b38934f2871435e9dc15608c86e8be.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-02 02:59:37.000000000 Z
+- name: d3
+  description: Data-Driven Documents
+  package_url: https://www.npmjs.com/d3
+  version: 7.8.4
+  license: ISC
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16224/default_fef27d1523ac1844fc00e83e47bddd8898ff8a89.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: Damika
+  last_updated_on: 2022-12-31 19:28:37.000000000 Z
+- name: d3-shape
+  description: Graphical primitives for visualization
+  package_url: https://www.npmjs.com/d3-shape
+  version: 3.2.0
+  license: ISC
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17385/default_c1932d441699b98abea6098c6f8f65e2acb4f5ed.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-29 01:55:47.000000000 Z
+- name: eslint-config-airbnb
+  description: Airbnb's ESLint config, following our styleguide
+  package_url: https://www.npmjs.com/eslint-config-airbnb
+  version: 19.0.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15857/default_7c39a83d4acd952df89b1ebfdb94c8646324fbf1.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-24 17:07:25.000000000 Z
+- name: eslint-config-prettier
+  description: Turns off all rules that are unnecessary or might conflict with Prettier
+  package_url: https://www.npmjs.com/eslint-config-prettier
+  version: 8.8.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15879/default_0b10af8ca19c215f781dc07442e75bdc831089d0.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-24 17:07:25.000000000 Z
+- name: eslint-plugin-import
+  description: Import with sanity
+  package_url: https://www.npmjs.com/eslint-plugin-import
+  version: 2.27.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15806/default_98aa227f51aa9d787815ec3fd98d0ab2bfebbb91.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-24 17:07:25.000000000 Z
+- name: eslint-plugin-jsx-a11y
+  description: Static AST checker for accessibility rules on JSX elements
+  package_url: https://www.npmjs.com/eslint-plugin-jsx-a11y
+  version: 6.7.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15845/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-24 17:07:25.000000000 Z
+- name: eslint-plugin-react
+  description: React specific linting rules for ESLint
+  package_url: https://www.npmjs.com/eslint-plugin-react
+  version: 7.32.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15817/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-28 11:48:49.000000000 Z
+- name: eslint-plugin-react-hooks
+  description: ESLint rules for React Hooks
+  package_url: https://www.npmjs.com/eslint-plugin-react-hooks
+  version: 4.6.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16149/default_1f3a2fc7d882e29a43394ecdf491b8989ea3f0fa.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-28 11:48:49.000000000 Z
+- name: husky
+  description: Prevents bad commit or push
+  package_url: https://www.npmjs.com/husky
+  version: 8.0.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15831/default_14fd11531839d935f920b6d55bd6f3528c890ad7.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-09 03:53:03.000000000 Z
+- name: lint-staged
+  description: Lint files staged by git
+  package_url: https://www.npmjs.com/lint-staged
+  version: 13.2.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15868/default_e0a4fb1126d7400f419f0931cf1669947a5bc552.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-24 16:08:23.000000000 Z
+- name: moment
+  description: Parse, validate, manipulate, and display dates
+  package_url: https://www.npmjs.com/moment
+  version: 2.29.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15847/default_4479dbac220be99e50e724b2df6cf415241d71fd.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-29 01:55:47.000000000 Z
+- name: prop-types
+  description: Runtime type checking for React props and similar objects
+  package_url: https://www.npmjs.com/prop-types
+  version: 15.8.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15843/default_b71c906aeda030a5e2f1fe40bf12a93be52404ab.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-11 05:02:01.000000000 Z
+- name: react-native
+  description: A framework for building native apps using React
+  package_url: https://www.npmjs.com/react-native
+  version: 0.71.6
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16064/default_5a461d436012a0c4024534aaba303dcdb0297d24.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-28 11:48:49.000000000 Z
+- name: react-native-svg
+  description: SVG library for react-native
+  package_url: https://www.npmjs.com/react-native-svg
+  version: 13.4.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/18169/default_4ad5899bf99118763f1e1098ab583aaff0340ee8.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-04-28 11:48:49.000000000 Z
+- name: tailwindcss
+  description: A utility-first CSS framework for rapidly building custom user interfaces
+  package_url: https://www.npmjs.com/tailwindcss
+  version: 3.3.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17398/default_2cd7ed1c123f2fca074a6f4b16c4e73d5bfe82be.png
+  detection_source_url: https://github.com/Damika-Anupama/FlashGuard-Mobile-Application/blob/main/package-lock.json
+  detection_source: package.json
+  last_updated_by: mmz-001
+  last_updated_on: 2023-01-09 05:30:09.000000000 Z
